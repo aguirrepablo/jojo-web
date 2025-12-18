@@ -16,7 +16,7 @@ const siteConfig = {
   name: "JOJO - Consultora de Software",
   url: "https://jojo.ar", // Reemplazar con tu dominio final
   description: "Consultora de software especializada en desarrollo a medida, integración de sistemas y soluciones de inteligencia artificial para empresas que buscan transformación digital.",
-  ogImage: "https://jojo.ar/og.jpeg", // Reemplazar con la URL de tu imagen para redes sociales
+  ogImage: "https://jojo.ar/og.svg", // Reemplazar con la URL de tu imagen para redes sociales
 };
 
 export const metadata: Metadata = {
