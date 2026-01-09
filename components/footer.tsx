@@ -24,6 +24,9 @@ export function Footer({ currentTheme }: FooterProps) {
                             Consultora de software especializada en desarrollo a medida, integración de sistemas
                             y soluciones de inteligencia artificial para empresas que buscan transformación digital.
                         </p>
+                        <p>
+                            Villa Carlos Paz, Córdoba, Argentina
+                        </p>
                     </div>
 
                     <div>

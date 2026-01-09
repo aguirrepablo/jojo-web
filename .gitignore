@@ -40,3 +40,11 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 GEMINI.md
+tempo.txt
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+.env.*.local
+.env.example
+.env.*.example

@@ -9,11 +9,19 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "@ai-sdk/openai": "^2.0.88",
+    "@ai-sdk/react": "^2.0.117",
+    "ai": "^5.0.115",
     "clsx": "^2.1.1",
+    "dotenv": "^17.2.3",
     "lucide-react": "^0.561.0",
     "next": "16.0.10",
+    "openai": "^6.14.0",
     "react": "19.2.1",
     "react-dom": "19.2.1",
+    "react-google-recaptcha-v3": "^1.11.0",
+    "socket.io": "^4.8.1",
+    "socket.io-client": "^4.8.1",
     "tailwind-merge": "^3.4.0"
   },
   "devDependencies": {
@@ -21,9 +29,11 @@
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "concurrently": "^9.2.1",
     "eslint": "^9",
     "eslint-config-next": "16.0.10",
     "tailwindcss": "^4",
+    "ts-node": "^10.9.2",
     "typescript": "^5"
   }
 }

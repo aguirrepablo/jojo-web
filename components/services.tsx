@@ -1,8 +1,9 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "./ui/card";
-import { 
-  Code2, 
-  Database, 
-  Brain
+import {
+  Code2,
+  Database,
+  Brain,
+  Check 
 } from "lucide-react";
 
 const services = [
@@ -10,16 +11,31 @@ const services = [
     icon: Code2,
     title: "Desarrollo de Software a Medida",
     description: "Construcción de aplicaciones web y móviles con arquitecturas modernas. Backend robusto con .NET y NestJS, frontend responsive con React y Vue. Soluciones escalables que crecen con tu negocio.",
+    descriptions: [
+      'Construcción de aplicaciones web y móviles con arquitecturas modernas',
+      'Backend robusto con .NET y NestJS, frontend responsive con React y Vue.',
+      'Soluciones escalables que crecen con tu negocio.'
+    ]
   },
   {
     icon: Database,
     title: "Integración y Bases de Datos",
     description: "Diseño e implementación de APIs RESTful y GraphQL. Integración con servicios cloud (Azure, AWS). Arquitectura de bases de datos SQL y NoSQL optimizadas para alto rendimiento.",
+    descriptions: [
+      'Diseño e implementación de APIs RESTful y GraphQL.',
+      'Integración con servicios cloud (Azure, AWS).',
+      'Arquitectura de bases de datos SQL y NoSQL optimizadas para alto rendimiento.'
+    ]
   },
   {
     icon: Brain,
     title: "Soluciones de IA Aplicada",
     description: "Implementación de agentes inteligentes con Anthropic y Gemini. Automatización de procesos empresariales con IA. Análisis de datos y machine learning para decisiones estratégicas.",
+    descriptions:[
+      'Implementación de agentes inteligentes con Anthropic y Gemini.',
+      'Automatización de procesos empresariales con IA.',
+      'Análisis de datos y machine learning para decisiones estratégicas.'
+    ]
   },
 ];
 
@@ -45,7 +61,18 @@ export function Services() {
                 <CardTitle className="text-xl">{service.title}</CardTitle>
               </CardHeader>
               <CardContent>
-                <CardDescription className="leading-relaxed">{service.description}</CardDescription>
+                {/* <CardDescription className="leading-relaxed">{service.description}</CardDescription> */}
+                <ul
+                  role="list"
+                  className="text-gray-300 mt-8 space-y-3 text-sm/6 sm:mt-10"
+                >
+                  {service.descriptions?.map((description) => (
+                    <li key={description} className="flex gap-x-3">
+                      <Check className="text-white " />
+                      {description}
+                    </li>
+                  ))}
+                </ul>
               </CardContent>
             </Card>
           ))}

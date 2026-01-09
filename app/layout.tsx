@@ -1,3 +1,4 @@
+import { Providers } from "@/components/providers";
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
@@ -67,28 +68,47 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const gaMeasurementId = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID;
   return (
     <html lang="es">
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "Organization",
-            "name": siteConfig.name,
-            "url": siteConfig.url,
-            "logo": `${siteConfig.url}/assets/svg/jojo_logo_dark.svg`, // o la versión light
-            "description": siteConfig.description,
-            "contactPoint": {
-              "@type": "ContactPoint",
-              "telephone": "+54-9-3541-214876",
-              "contactType": "Customer Service"
-            }
-          }) }}
-        />
-        {children}
+        <Providers>
+          {gaMeasurementId && (
+            <>
+              {/* Google Analytics Script */}
+              <script async src={`https://www.googletagmanager.com/gtag/js?id=${gaMeasurementId}`}></script>
+              <script
+                dangerouslySetInnerHTML={{
+                  __html: `
+                    window.dataLayer = window.dataLayer || [];
+                    function gtag(){dataLayer.push(arguments);}
+                    gtag('js', new Date());
+                    gtag('config', '${gaMeasurementId}');
+                  `,
+                }}
+              />
+            </>
+          )}
+          <script
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{ __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Organization",
+              "name": siteConfig.name,
+              "url": siteConfig.url,
+              "logo": `${siteConfig.url}/assets/svg/jojo_logo_dark.svg`, // o la versión light
+              "description": siteConfig.description,
+              "contactPoint": {
+                "@type": "ContactPoint",
+                "telephone": "+54-9-3541-214876",
+                "contactType": "Customer Service"
+              }
+            }) }}
+          />
+          {children}
+        </Providers>
       </body>
     </html>
   );
