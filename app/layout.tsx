@@ -36,7 +36,13 @@ export const metadata: Metadata = {
     ".NET",
     "NestJS",
     "Transformación Digital",
+    "Argentina",
+    "Córdoba",
+    "Software a medida"
   ],
+  alternates: {
+    canonical: siteConfig.url,
+  },
   openGraph: {
     type: "website",
     locale: "es_AR",
@@ -61,7 +67,18 @@ export const metadata: Metadata = {
   },
   icons: {
     icon: "/favicon.ico",
-  }
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
 };
 
 export default function RootLayout({
@@ -96,16 +113,29 @@ export default function RootLayout({
             type="application/ld+json"
             dangerouslySetInnerHTML={{ __html: JSON.stringify({
               "@context": "https://schema.org",
-              "@type": "Organization",
+              "@type": "ProfessionalService",
               "name": siteConfig.name,
               "url": siteConfig.url,
-              "logo": `${siteConfig.url}/assets/svg/jojo_logo_dark.svg`, // o la versión light
+              "logo": `${siteConfig.url}/assets/svg/jojo_logo_dark.svg`,
+              "image": siteConfig.ogImage,
               "description": siteConfig.description,
+              "address": {
+                "@type": "PostalAddress",
+                "addressLocality": "Villa Carlos Paz",
+                "addressRegion": "Córdoba",
+                "addressCountry": "AR"
+              },
               "contactPoint": {
                 "@type": "ContactPoint",
                 "telephone": "+54-9-3541-214876",
-                "contactType": "Customer Service"
-              }
+                "contactType": "customer service",
+                "areaServed": "AR",
+                "availableLanguage": ["es", "en"]
+              },
+              "sameAs": [
+                "https://www.linkedin.com/in/paguirre90/"
+              ],
+              "priceRange": "$$"
             }) }}
           />
           {children}

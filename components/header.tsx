@@ -33,7 +33,7 @@ export function Header({ onToggleTheme, currentTheme }: HeaderProps) {
       <div className="container mx-auto flex h-16 items-center justify-between px-4">
         {/* Logo */}
         <div className="flex items-center">
-          <Link href="#home" onClick={(e) => handleScroll(e, "#home")}>
+          <Link href="#home" onClick={(e) => handleScroll(e, "#home")} aria-label="Ir al inicio">
             <Image
               src={currentTheme === 'dark' ? '/assets/svg/jojo_logo_dark.svg' : '/assets/svg/jojo_logo_light.svg'}
               alt="JOJO Logo"
