@@ -4,36 +4,18 @@ import Link from "next/link";
 import Image from "next/image";
 import { Menu, Moon, Sun } from "lucide-react";
 import { Button } from "./ui/button";
-import { useRef } from "react";
+import { useTheme } from "@/hooks/useTheme";
 
-interface HeaderProps {
-  onToggleTheme: () => void;
-  currentTheme: "light" | "dark";
-}
-
-export function Header({ onToggleTheme, currentTheme }: HeaderProps) {
-  const headerRef = useRef<HTMLElement>(null);
-
-  const handleScroll = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
-    e.preventDefault();
-    const targetId = href.replace(/.*#/, "");
-    const elem = document.getElementById(targetId);
-    if (elem) {
-      const headerHeight = headerRef.current?.offsetHeight ?? 0;
-      const targetPosition = elem.offsetTop - headerHeight;
-      window.scrollTo({
-        top: targetPosition,
-        behavior: "smooth",
-      });
-    }
-  };
+export function Header() {
+  const { resolvedTheme, toggleTheme } = useTheme();
+  const currentTheme = resolvedTheme;
 
   return (
-    <header ref={headerRef} className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/100">
+    <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/100">
       <div className="container mx-auto flex h-16 items-center justify-between px-4">
         {/* Logo */}
         <div className="flex items-center">
-          <Link href="#home" onClick={(e) => handleScroll(e, "#home")} aria-label="Ir al inicio">
+          <Link href="/" aria-label="Ir al inicio">
             <Image
               src={currentTheme === 'dark' ? '/assets/svg/jojo_logo_dark.svg' : '/assets/svg/jojo_logo_light.svg'}
               alt="JOJO Logo"
@@ -48,16 +30,14 @@ export function Header({ onToggleTheme, currentTheme }: HeaderProps) {
         {/* Navegación Desktop */}
         <nav className="hidden md:flex items-center space-x-6 absolute left-1/2 -translate-x-1/2">
           <Link
-            href="#servicios"
+            href="/servicios"
             className="text-muted-foreground hover:text-foreground transition-colors"
-            onClick={(e) => handleScroll(e, "#servicios")}
           >
             Servicios
           </Link>
           <Link
-            href="#enfoque"
+            href="/enfoque"
             className="text-muted-foreground hover:text-foreground transition-colors"
-            onClick={(e) => handleScroll(e, "#enfoque")}
           >
             Enfoque
           </Link>
@@ -68,7 +48,7 @@ export function Header({ onToggleTheme, currentTheme }: HeaderProps) {
           <Button
             variant="ghost"
             size="icon"
-            onClick={onToggleTheme}
+            onClick={toggleTheme}
             aria-label="Cambiar tema"
           >
             {currentTheme === "dark" ? (
