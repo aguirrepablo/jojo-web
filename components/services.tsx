@@ -2,40 +2,24 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "./ui/
 import {
   Code2,
   Database,
-  Brain,
-  Check 
+  Brain
 } from "lucide-react";
 
 const services = [
   {
     icon: Code2,
-    title: "Desarrollo de Software a Medida",
-    description: "Construcción de aplicaciones web y móviles con arquitecturas modernas. Backend robusto con .NET y NestJS, frontend responsive con React y Vue. Soluciones escalables que crecen con tu negocio.",
-    descriptions: [
-      'Construcción de aplicaciones web y móviles con arquitecturas modernas',
-      'Backend robusto con .NET y NestJS, frontend responsive con React y Vue.',
-      'Soluciones escalables que crecen con tu negocio.'
-    ]
+    title: "Desarrollo a Medida",
+    description: "Construimos aplicaciones web y móviles que se adaptan exactamente a tus procesos de negocio. Utilizamos arquitecturas modernas y escalables con tecnologías probadas, garantizando soluciones profesionales que crecen junto a tu empresa.",
   },
   {
     icon: Database,
-    title: "Integración y Bases de Datos",
-    description: "Diseño e implementación de APIs RESTful y GraphQL. Integración con servicios cloud (Azure, AWS). Arquitectura de bases de datos SQL y NoSQL optimizadas para alto rendimiento.",
-    descriptions: [
-      'Diseño e implementación de APIs RESTful y GraphQL.',
-      'Integración con servicios cloud (Azure, AWS).',
-      'Arquitectura de bases de datos SQL y NoSQL optimizadas para alto rendimiento.'
-    ]
+    title: "Arquitectura e Integración",
+    description: "Diseñamos e implementamos arquitecturas robustas y APIs modernas que conectan tus sistemas de manera eficiente. Integración con servicios cloud (Azure, AWS) y bases de datos optimizadas para máximo rendimiento y confiabilidad.",
   },
   {
     icon: Brain,
-    title: "Soluciones de IA Aplicada",
-    description: "Implementación de agentes inteligentes con Anthropic y Gemini. Automatización de procesos empresariales con IA. Análisis de datos y machine learning para decisiones estratégicas.",
-    descriptions:[
-      'Implementación de agentes inteligentes con Anthropic y Gemini.',
-      'Automatización de procesos empresariales con IA.',
-      'Análisis de datos y machine learning para decisiones estratégicas.'
-    ]
+    title: "IA Aplicada al Negocio",
+    description: "Incorporamos inteligencia artificial práctica en tus procesos empresariales. Desde agentes conversacionales hasta automatización inteligente y análisis predictivo, transformamos datos en decisiones estratégicas que generan ventaja competitiva.",
   },
 ];
 
@@ -61,18 +45,7 @@ export function Services() {
                 <CardTitle className="text-xl">{service.title}</CardTitle>
               </CardHeader>
               <CardContent>
-                {/* <CardDescription className="leading-relaxed">{service.description}</CardDescription> */}
-                <ul
-                  role="list"
-                  className="text-gray-300 mt-8 space-y-3 text-sm/6 sm:mt-10"
-                >
-                  {service.descriptions?.map((description) => (
-                    <li key={description} className="flex gap-x-3">
-                      <Check className="text-white " />
-                      {description}
-                    </li>
-                  ))}
-                </ul>
+                <CardDescription className="leading-relaxed">{service.description}</CardDescription>
               </CardContent>
             </Card>
           ))}

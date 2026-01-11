@@ -6,6 +6,7 @@ import { Hero } from "@/components/hero";
 import { Footer } from "@/components/footer";
 import { Approach } from "@/components/approach";
 import { Services } from "@/components/services";
+import { About } from "@/components/about";
 import { useTheme } from "@/hooks/useTheme";
 import { Chat } from "@/components/chat";
 
@@ -20,6 +21,7 @@ export default function Page() {
       <main>
         <Hero onOpenChat={() => setIsChatOpen(true)} />
         {showChat && <Chat isOpen={isChatOpen} onClose={() => setIsChatOpen(false)} />}
+        <About />
         <Services />
         <Approach />
       </main>

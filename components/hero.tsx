@@ -13,14 +13,14 @@ export function Hero({ onOpenChat }: HeroProps) {
         <h1
           className="mx-auto max-w-4xl text-5xl font-bold md:text-6xl lg:text-7xl tracking-tight mb-6 text-foreground"
         >
-          Innovación y crecimiento digital
+          Socios tecnológicos para la transformación digital
         </h1>
         <p
-          className="mx-auto max-w-2xl text-xl text-muted-foreground mb-10 leading-relaxed"
+          className="mx-auto max-w-3xl text-xl text-muted-foreground mb-10 leading-relaxed"
         >
-          Desbloquea el potencial digital de tu empresa con
-          soluciones de software a medida e Inteligencia
-          Artificial.
+          Transformamos ideas en soluciones digitales inteligentes.<br/>
+          Desarrollamos software a medida con arquitecturas modernas, implementando buenas prácticas de la industria y potenciando cada proyecto con Inteligencia Artificial.<br/>
+          Tu socio tecnológico para escalar y profesionalizar tu negocio.
         </p>
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16">
           {showChat ? (
@@ -28,7 +28,7 @@ export function Hero({ onOpenChat }: HeroProps) {
               onClick={onOpenChat}
               className="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground shadow hover:bg-primary/90 h-10 px-8 py-2 w-full sm:w-auto"
             >
-              Charlemos
+              Conversemos sobre tu proyecto
             </button>
           ) : (
             <a
@@ -37,7 +37,7 @@ export function Hero({ onOpenChat }: HeroProps) {
               rel="noopener noreferrer"
               className="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground shadow hover:bg-primary/90 h-10 px-8 py-2 w-full sm:w-auto"
             >
-              Charlemos
+              Conversemos sobre tu proyecto
             </a>
           )}
         </div>

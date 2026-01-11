@@ -21,8 +21,7 @@ export function Footer({ currentTheme }: FooterProps) {
                             />
                         </div>
                         <p className="text-muted-foreground mb-6 max-w-md leading-relaxed">
-                            Consultora de software especializada en desarrollo a medida, integración de sistemas
-                            y soluciones de inteligencia artificial para empresas que buscan transformación digital.
+                            Socios tecnológicos para la transformación digital. Desarrollamos software a medida con arquitecturas modernas e Inteligencia Artificial para escalar y profesionalizar tu negocio.
                         </p>
                         <p>
                             Villa Carlos Paz, Córdoba, Argentina
@@ -33,16 +32,16 @@ export function Footer({ currentTheme }: FooterProps) {
                         <h4 className="mb-4 font-semibold text-foreground">Servicios</h4>
                         <ul className="space-y-2 text-sm text-muted-foreground">
                             <li><a href="#servicios" className="hover:text-foreground transition-colors">Desarrollo a Medida</a></li>
-                            <li><a href="#servicios" className="hover:text-foreground transition-colors">Integración de Sistemas</a></li>
-                            <li><a href="#servicios" className="hover:text-foreground transition-colors">Soluciones de IA</a></li>
-                            <li><a href="#enfoque" className="hover:text-foreground transition-colors">Nuestro Enfoque</a></li>
+                            <li><a href="#servicios" className="hover:text-foreground transition-colors">Arquitectura e Integración</a></li>
+                            <li><a href="#servicios" className="hover:text-foreground transition-colors">IA Aplicada al Negocio</a></li>
+                            <li><a href="#enfoque" className="hover:text-foreground transition-colors">Nuestro Diferencial</a></li>
                         </ul>
                     </div>
 
                     <div>
                         <h4 className="mb-4 font-semibold text-foreground">Contacto</h4>
                         <ul className="space-y-2 text-sm text-muted-foreground">
-                            <li><a href="https://wa.me/5493541214876" target="_blank" rel="noopener noreferrer" className="hover:text-foreground transition-colors">Consulta Gratuita</a></li>
+                            <li><a href="https://wa.me/5493541214876" target="_blank" rel="noopener noreferrer" className="hover:text-foreground transition-colors">Conversemos sobre tu proyecto</a></li>
                             <li><a href="https://www.linkedin.com/in/paguirre90/" target="_blank" rel="noopener noreferrer" className="hover:text-foreground transition-colors">LinkedIn</a></li>
                         </ul>
                     </div>
@@ -54,10 +53,10 @@ export function Footer({ currentTheme }: FooterProps) {
                     <p className="text-sm text-muted-foreground mb-4 md:mb-0">
                         © 2025 JOJO. Todos los derechos reservados.
                     </p>
-                    <div className="flex space-x-6 text-sm text-muted-foreground">
+                    {/* <div className="flex space-x-6 text-sm text-muted-foreground">
                         <a href="#" className="hover:text-foreground transition-colors">Privacidad</a>
                         <a href="#" className="hover:text-foreground transition-colors">Términos</a>
-                    </div>
+                    </div> */}
                 </div>
             </div>
         </footer>
