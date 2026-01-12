@@ -5,40 +5,45 @@ import {
   Brain, 
   Users
 } from "lucide-react";
+import { Dictionary } from "@/dictionaries/es";
 
-const values = [
-  {
-    icon: Award,
-    title: "Buenas prácticas desde el día uno",
-    description: "Aplicamos estándares enterprise de testing, documentación y arquitectura en cada proyecto",
-  },
-  {
-    icon: Brain,
-    title: "IA como acelerador",
-    description: "No solo desarrollamos software, lo potenciamos con inteligencia artificial para automatizar, predecir y optimizar",
-  },
-  {
-    icon: Lightbulb,
-    title: "Tecnología moderna",
-    description: "Stack actualizado con las herramientas que usan las grandes tech companies",
-  },
-  {
-    icon: Users,
-    title: "Equipo senior",
-    description: "Más de 10 años de experiencia en desarrollo full-stack y arquitecturas complejas",
-  },
-];
+interface ApproachProps {
+  dict: Dictionary;
+}
 
-export function Approach() {
+export function Approach({ dict }: ApproachProps) {
+  const values = [
+    {
+      icon: Award,
+      title: dict.approach.items.practices.title,
+      description: dict.approach.items.practices.description,
+    },
+    {
+      icon: Brain,
+      title: dict.approach.items.ai.title,
+      description: dict.approach.items.ai.description,
+    },
+    {
+      icon: Lightbulb,
+      title: dict.approach.items.tech.title,
+      description: dict.approach.items.tech.description,
+    },
+    {
+      icon: Users,
+      title: dict.approach.items.team.title,
+      description: dict.approach.items.team.description,
+    },
+  ];
+
   return (
     <section id="enfoque" className="min-h-[calc(100vh-4rem)] flex items-center bg-background">
       <div className="container mx-auto px-4 py-24">
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl tracking-tight mb-4 font-bold text-foreground">
-            Nuestro Diferencial
+            {dict.approach.title}
           </h2>
           <p className="max-w-2xl mx-auto text-lg text-muted-foreground">
-            Por qué elegirnos como tu socio tecnológico
+            {dict.approach.subtitle}
           </p>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">

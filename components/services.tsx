@@ -4,35 +4,40 @@ import {
   Database,
   Brain
 } from "lucide-react";
+import { Dictionary } from "@/dictionaries/es";
 
-const services = [
-  {
-    icon: Code2,
-    title: "Desarrollo a Medida",
-    description: "Construimos aplicaciones web y móviles que se adaptan exactamente a tus procesos de negocio. Utilizamos arquitecturas modernas y escalables con tecnologías probadas, garantizando soluciones profesionales que crecen junto a tu empresa.",
-  },
-  {
-    icon: Database,
-    title: "Arquitectura e Integración",
-    description: "Diseñamos e implementamos arquitecturas robustas y APIs modernas que conectan tus sistemas de manera eficiente. Integración con servicios cloud (Azure, AWS) y bases de datos optimizadas para máximo rendimiento y confiabilidad.",
-  },
-  {
-    icon: Brain,
-    title: "IA Aplicada al Negocio",
-    description: "Incorporamos inteligencia artificial práctica en tus procesos empresariales. Desde agentes conversacionales hasta automatización inteligente y análisis predictivo, transformamos datos en decisiones estratégicas que generan ventaja competitiva.",
-  },
-];
+interface ServicesProps {
+  dict: Dictionary;
+}
 
-export function Services() {
+export function Services({ dict }: ServicesProps) {
+  const services = [
+    {
+      icon: Code2,
+      title: dict.services.items.customDevelopment.title,
+      description: dict.services.items.customDevelopment.description,
+    },
+    {
+      icon: Database,
+      title: dict.services.items.architecture.title,
+      description: dict.services.items.architecture.description,
+    },
+    {
+      icon: Brain,
+      title: dict.services.items.ai.title,
+      description: dict.services.items.ai.description,
+    },
+  ];
+
   return (
     <section id="servicios" className="min-h-[calc(100vh-4rem)] flex items-center bg-card">
       <div className="container mx-auto px-4 py-24">
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl tracking-tight mb-4 font-bold text-foreground">
-            Nuestros Servicios
+            {dict.services.title}
           </h2>
           <p className="max-w-2xl mx-auto text-lg text-muted-foreground">
-            Soluciones tecnológicas integrales para llevar tu empresa al siguiente nivel
+            {dict.services.subtitle}
           </p>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">

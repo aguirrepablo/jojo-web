@@ -1,7 +1,8 @@
 import { Providers } from "@/components/providers";
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
-import "./globals.css";
+import "../globals.css";
+import { getDictionary } from "../get-dictionary";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -14,82 +15,104 @@ const geistMono = Geist_Mono({
 });
 
 const siteConfig = {
-  name: "JOJO - Socios tecnológicos para la transformación digital",
   url: "https://jojo.ar/",
-  description: "Desarrollamos software a medida con IA y buenas prácticas. Arquitecturas modernas que escalan tu negocio. Tu socio tecnológico en transformación digital.",
   ogImage: "https://jojo.ar/og.svg",
 };
 
-export const metadata: Metadata = {
-  metadataBase: new URL(siteConfig.url),
-  title: {
-    default: siteConfig.name,
-    template: `%s | ${siteConfig.name}`,
-  },
-  description: siteConfig.description,
-  keywords: [
-    "Desarrollo de Software",
-    "Inteligencia Artificial",
-    "Consultora de Software",
-    "Socios tecnológicos",
-    "Next.js",
-    "React",
-    ".NET",
-    "NestJS",
-    "Transformación Digital",
-    "Argentina",
-    "Córdoba",
-    "Software a medida"
-  ],
-  alternates: {
-    canonical: siteConfig.url,
-  },
-  openGraph: {
-    type: "website",
-    locale: "es_AR",
-    url: siteConfig.url,
-    siteName: siteConfig.name,
-    title: siteConfig.name,
-    description: siteConfig.description,
-    images: [
-      {
-        url: siteConfig.ogImage,
-        width: 1200,
-        height: 630,
-        alt: siteConfig.name,
-      },
+export async function generateMetadata({ params }: { params: Promise<{ lang: string }> }): Promise<Metadata> {
+  const { lang } = await params;
+  const dict = await getDictionary(lang);
+
+  return {
+    metadataBase: new URL(siteConfig.url),
+    title: {
+      default: dict.metadata.title,
+      template: `%s | ${dict.metadata.title}`,
+    },
+    description: dict.metadata.description,
+    keywords: [
+      "Desarrollo de Software",
+      "Inteligencia Artificial",
+      "Consultora de Software",
+      "Socios tecnológicos",
+      "Next.js",
+      "React",
+      ".NET",
+      "NestJS",
+      "Transformación Digital",
+      "Argentina",
+      "Córdoba",
+      "Software a medida",
+      "Software Development",
+      "Artificial Intelligence",
+      "Software Consultancy",
+      "Technology Partners",
+      "Digital Transformation",
+      "Custom Software"
     ],
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: siteConfig.name,
-    description: siteConfig.description,
-    images: [siteConfig.ogImage],
-  },
-  icons: {
-    icon: "/favicon.ico",
-  },
-  robots: {
-    index: true,
-    follow: true,
-    googleBot: {
+    alternates: {
+      canonical: siteConfig.url,
+      languages: {
+        'es': 'https://jojo.ar/es',
+        'en': 'https://jojo.ar/en',
+      },
+    },
+    openGraph: {
+      type: "website",
+      locale: lang === 'es' ? 'es_AR' : 'en_US',
+      url: `${siteConfig.url}${lang}`,
+      siteName: "JOJO",
+      title: dict.metadata.title,
+      description: dict.metadata.description,
+      images: [
+        {
+          url: siteConfig.ogImage,
+          width: 1200,
+          height: 630,
+          alt: "JOJO",
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: dict.metadata.title,
+      description: dict.metadata.description,
+      images: [siteConfig.ogImage],
+    },
+    icons: {
+      icon: "/favicon.ico",
+    },
+    robots: {
       index: true,
       follow: true,
-      'max-video-preview': -1,
-      'max-image-preview': 'large',
-      'max-snippet': -1,
+      googleBot: {
+        index: true,
+        follow: true,
+        'max-video-preview': -1,
+        'max-image-preview': 'large',
+        'max-snippet': -1,
+      },
     },
-  },
-};
+  };
+}
 
-export default function RootLayout({
+export async function generateStaticParams() {
+  return [{ lang: 'es' }, { lang: 'en' }];
+}
+
+export default async function RootLayout({
   children,
+  params,
 }: Readonly<{
   children: React.ReactNode;
+  params: Promise<{ lang: string }>;
 }>) {
+  const { lang } = await params;
   const gaMeasurementId = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID;
+  const dict = await getDictionary(lang);
+
   return (
-    <html lang="es">
+    <html lang={lang}>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
@@ -115,11 +138,11 @@ export default function RootLayout({
             dangerouslySetInnerHTML={{ __html: JSON.stringify({
               "@context": "https://schema.org",
               "@type": "ProfessionalService",
-              "name": siteConfig.name,
+              "name": "JOJO",
               "url": siteConfig.url,
               "logo": `${siteConfig.url}/assets/svg/jojo_logo_dark.svg`,
               "image": siteConfig.ogImage,
-              "description": siteConfig.description,
+              "description": dict.metadata.description,
               "address": {
                 "@type": "PostalAddress",
                 "addressLocality": "Villa Carlos Paz",
@@ -130,7 +153,7 @@ export default function RootLayout({
                 "@type": "ContactPoint",
                 "telephone": "+54-9-3541-214876",
                 "contactType": "customer service",
-                "areaServed": "AR",
+                "areaServed": ["AR", "US", "LATAM"],
                 "availableLanguage": ["es", "en"]
               },
               "sameAs": [

@@ -3,12 +3,14 @@
 import { Separator } from './ui/separator';
 import Image from 'next/image';
 import Link from 'next/link';
+import { Dictionary } from "@/dictionaries/es";
 
 interface FooterProps {
     currentTheme: 'light' | 'dark';
+    dict: Dictionary;
 }
 
-export function Footer({ currentTheme }: FooterProps) {
+export function Footer({ currentTheme, dict }: FooterProps) {
     const handleScroll = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
         e.preventDefault();
         const targetId = href.replace(/.*#/, "");
@@ -39,15 +41,15 @@ export function Footer({ currentTheme }: FooterProps) {
                             />
                         </div>
                         <p className="text-muted-foreground mb-6 max-w-md leading-relaxed">
-                            Socios tecnológicos para la transformación digital. Desarrollamos software a medida con arquitecturas modernas e Inteligencia Artificial para escalar y profesionalizar tu negocio.
+                            {dict.footer.description}
                         </p>
                         <p>
-                            Villa Carlos Paz, Córdoba, Argentina
+                            {dict.footer.location}
                         </p>
                     </div>
 
                     <div>
-                        <h4 className="mb-4 font-semibold text-foreground">Servicios</h4>
+                        <h4 className="mb-4 font-semibold text-foreground">{dict.footer.services_title}</h4>
                         <ul className="space-y-2 text-sm text-muted-foreground">
                             <li>
                                 <Link
@@ -55,7 +57,7 @@ export function Footer({ currentTheme }: FooterProps) {
                                     onClick={(e) => handleScroll(e, "#servicios")}
                                     className="hover:text-foreground transition-colors"
                                 >
-                                    Desarrollo a Medida
+                                    {dict.footer.links.customDevelopment}
                                 </Link>
                             </li>
                             <li>
@@ -64,7 +66,7 @@ export function Footer({ currentTheme }: FooterProps) {
                                     onClick={(e) => handleScroll(e, "#servicios")}
                                     className="hover:text-foreground transition-colors"
                                 >
-                                    Arquitectura e Integración
+                                    {dict.footer.links.architecture}
                                 </Link>
                             </li>
                             <li>
@@ -73,7 +75,7 @@ export function Footer({ currentTheme }: FooterProps) {
                                     onClick={(e) => handleScroll(e, "#servicios")}
                                     className="hover:text-foreground transition-colors"
                                 >
-                                    IA Aplicada al Negocio
+                                    {dict.footer.links.ai}
                                 </Link>
                             </li>
                             <li>
@@ -82,16 +84,16 @@ export function Footer({ currentTheme }: FooterProps) {
                                     onClick={(e) => handleScroll(e, "#enfoque")}
                                     className="hover:text-foreground transition-colors"
                                 >
-                                    Nuestro Diferencial
+                                    {dict.footer.links.focus}
                                 </Link>
                             </li>
                         </ul>
                     </div>
 
                     <div>
-                        <h4 className="mb-4 font-semibold text-foreground">Contacto</h4>
+                        <h4 className="mb-4 font-semibold text-foreground">{dict.footer.contact_title}</h4>
                         <ul className="space-y-2 text-sm text-muted-foreground">
-                            <li><a href="https://wa.me/5493541214876" target="_blank" rel="noopener noreferrer" className="hover:text-foreground transition-colors">Conversemos sobre tu proyecto</a></li>
+                            <li><a href="https://wa.me/5493541214876" target="_blank" rel="noopener noreferrer" className="hover:text-foreground transition-colors">{dict.footer.cta}</a></li>
                             <li><a href="https://www.linkedin.com/in/paguirre90/" target="_blank" rel="noopener noreferrer" className="hover:text-foreground transition-colors">LinkedIn</a></li>
                         </ul>
                     </div>
@@ -101,7 +103,7 @@ export function Footer({ currentTheme }: FooterProps) {
 
                 <div className="flex flex-col md:flex-row justify-between items-center">
                     <p className="text-sm text-muted-foreground mb-4 md:mb-0">
-                        © 2025 JOJO. Todos los derechos reservados.
+                        {dict.footer.rights}
                     </p>
                     {/* <div className="flex space-x-6 text-sm text-muted-foreground">
                         <a href="#" className="hover:text-foreground transition-colors">Privacidad</a>

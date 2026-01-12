@@ -15,9 +15,10 @@ export const useTheme = () => {
 
   useEffect(() => {
     const savedTheme = localStorage.getItem('theme');
-    if (isTheme(savedTheme)) {
+    if (isTheme(savedTheme) && savedTheme !== theme) {
       setTheme(savedTheme);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {

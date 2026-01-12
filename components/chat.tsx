@@ -4,6 +4,7 @@ import { useRef, useEffect, useCallback, useState, FormEvent } from "react";
 import { Button } from "./ui/button";
 import { Send, Bot, User, X, RotateCw } from "lucide-react";
 import { useSessionStorage } from "@/hooks/useSessionStorage";
+import { Dictionary } from "@/dictionaries/es";
 
 interface Message {
   id: string;
@@ -14,12 +15,13 @@ interface Message {
 interface ChatProps {
   isOpen: boolean;
   onClose: () => void;
+  dict: Dictionary;
 }
 
 const WS_URL = process.env.NEXT_PUBLIC_CHAT_WS_URL || "ws://localhost:8080/v1/ws";
 const API_KEY = process.env.NEXT_PUBLIC_CHAT_API_KEY || "default_api_key";
 
-export function Chat({ isOpen, onClose }: ChatProps) {
+export function Chat({ isOpen, onClose, dict }: ChatProps) {
   const [messages, setMessages] = useSessionStorage<Message[]>('chat_messages', []);
   const [conversationId, setConversationId] = useSessionStorage<string>('chat_conversation_id', '');
   const [input, setInput] = useState("");
@@ -177,13 +179,13 @@ export function Chat({ isOpen, onClose }: ChatProps) {
               <div className="flex items-center gap-3">
                 <div className="w-12 h-12 rounded-full bg-white/20 flex items-center justify-center"><Bot className="w-7 h-7 text-white" /></div>
                 <div>
-                  <h3 className="text-white text-lg">Asistente JOJO</h3>
-                  <p className="text-white/80 text-sm">{isConnected ? "En línea" : "Conectando..."}</p>
+                  <h3 className="text-white text-lg">{dict.chat.title}</h3>
+                  <p className="text-white/80 text-sm">{isConnected ? dict.chat.status.online : dict.chat.status.connecting}</p>
                 </div>
               </div>
               <div className="flex items-center gap-2">
-                <button type="button" onClick={handleNewChat} className="w-10 h-10 rounded-full hover:bg-white/10 flex items-center justify-center transition-colors" aria-label="Nuevo Chat"><RotateCw className="w-5 h-5 text-white" /></button>
-                <button type="button" onClick={handleClose} className="w-10 h-10 rounded-full hover:bg-white/10 flex items-center justify-center transition-colors" aria-label="Cerrar chat"><X className="w-6 h-6 text-white" /></button>
+                <button type="button" onClick={handleNewChat} className="w-10 h-10 rounded-full hover:bg-white/10 flex items-center justify-center transition-colors" aria-label={dict.chat.new_chat}><RotateCw className="w-5 h-5 text-white" /></button>
+                <button type="button" onClick={handleClose} className="w-10 h-10 rounded-full hover:bg-white/10 flex items-center justify-center transition-colors" aria-label={dict.chat.close}><X className="w-6 h-6 text-white" /></button>
               </div>
             </div>
             <div ref={chatContainerRef} className="flex-1 overflow-y-auto p-8 space-y-6 bg-background min-h-0">
@@ -203,8 +205,8 @@ export function Chat({ isOpen, onClose }: ChatProps) {
             </div>
             <div className="border-t border-border bg-card p-4 flex-shrink-0">
               <form onSubmit={handleSubmit} className="flex gap-2">
-                <input value={input} onChange={(e) => setInput(e.target.value)} placeholder="Escribe tu mensaje..." className="flex-1 px-4 py-3 bg-background border border-border rounded-lg text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary" disabled={!isConnected} />
-                <Button type="submit" size="icon" className="h-12 w-12" disabled={!input.trim() || !isConnected} aria-label="Enviar mensaje"><Send className="h-5 w-5" /></Button>
+                <input value={input} onChange={(e) => setInput(e.target.value)} placeholder={dict.chat.placeholder} className="flex-1 px-4 py-3 bg-background border border-border rounded-lg text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary" disabled={!isConnected} />
+                <Button type="submit" size="icon" className="h-12 w-12" disabled={!input.trim() || !isConnected} aria-label={dict.chat.send}><Send className="h-5 w-5" /></Button>
               </form>
             </div>
           </div>
