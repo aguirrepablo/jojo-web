@@ -1,6 +1,4 @@
 import { Providers } from "@/components/providers";
-import { Header } from "@/components/header";
-import { Footer } from "@/components/footer";
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
@@ -140,11 +138,7 @@ export default function RootLayout({
               "priceRange": "$$"
             }) }}
           />
-          <Header />
-          <main>
-            {children}
-          </main>
-          <Footer />
+          {children}
         </Providers>
       </body>
     </html>
