@@ -15,12 +15,13 @@ const geistMono = Geist_Mono({
 
 const siteConfig = {
   name: "JOJO - Socios tecnológicos para la transformación digital",
-  url: "https://jojo.ar", // Reemplazar con tu dominio final
-  description: "Transformamos ideas en soluciones digitales inteligentes. Desarrollamos software a medida con arquitecturas modernas, implementando buenas prácticas de la industria y potenciando cada proyecto con Inteligencia Artificial. Tu socio tecnológico para escalar y profesionalizar tu negocio.",
-  ogImage: "https://jojo.ar/og.svg", // Reemplazar con la URL de tu imagen para redes sociales
+  url: "https://jojo.ar/",
+  description: "Desarrollamos software a medida con IA y buenas prácticas. Arquitecturas modernas que escalan tu negocio. Tu socio tecnológico en transformación digital.",
+  ogImage: "https://jojo.ar/og.svg",
 };
 
 export const metadata: Metadata = {
+  metadataBase: new URL(siteConfig.url),
   title: {
     default: siteConfig.name,
     template: `%s | ${siteConfig.name}`,

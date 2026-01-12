@@ -1,11 +1,29 @@
+"use client";
+
 import { Separator } from './ui/separator';
 import Image from 'next/image';
+import Link from 'next/link';
 
 interface FooterProps {
     currentTheme: 'light' | 'dark';
 }
 
 export function Footer({ currentTheme }: FooterProps) {
+    const handleScroll = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+        e.preventDefault();
+        const targetId = href.replace(/.*#/, "");
+        const elem = document.getElementById(targetId);
+        if (elem) {
+            const header = document.querySelector('header');
+            const headerHeight = header?.offsetHeight ?? 0;
+            const targetPosition = elem.offsetTop - headerHeight;
+            window.scrollTo({
+                top: targetPosition,
+                behavior: "smooth",
+            });
+        }
+    };
+
     return (
         <footer className="border-t bg-background">
             <div className="container mx-auto px-4 py-16">
@@ -31,10 +49,42 @@ export function Footer({ currentTheme }: FooterProps) {
                     <div>
                         <h4 className="mb-4 font-semibold text-foreground">Servicios</h4>
                         <ul className="space-y-2 text-sm text-muted-foreground">
-                            <li><a href="#servicios" className="hover:text-foreground transition-colors">Desarrollo a Medida</a></li>
-                            <li><a href="#servicios" className="hover:text-foreground transition-colors">Arquitectura e Integración</a></li>
-                            <li><a href="#servicios" className="hover:text-foreground transition-colors">IA Aplicada al Negocio</a></li>
-                            <li><a href="#enfoque" className="hover:text-foreground transition-colors">Nuestro Diferencial</a></li>
+                            <li>
+                                <Link
+                                    href="#servicios"
+                                    onClick={(e) => handleScroll(e, "#servicios")}
+                                    className="hover:text-foreground transition-colors"
+                                >
+                                    Desarrollo a Medida
+                                </Link>
+                            </li>
+                            <li>
+                                <Link
+                                    href="#servicios"
+                                    onClick={(e) => handleScroll(e, "#servicios")}
+                                    className="hover:text-foreground transition-colors"
+                                >
+                                    Arquitectura e Integración
+                                </Link>
+                            </li>
+                            <li>
+                                <Link
+                                    href="#servicios"
+                                    onClick={(e) => handleScroll(e, "#servicios")}
+                                    className="hover:text-foreground transition-colors"
+                                >
+                                    IA Aplicada al Negocio
+                                </Link>
+                            </li>
+                            <li>
+                                <Link
+                                    href="#enfoque"
+                                    onClick={(e) => handleScroll(e, "#enfoque")}
+                                    className="hover:text-foreground transition-colors"
+                                >
+                                    Nuestro Diferencial
+                                </Link>
+                            </li>
                         </ul>
                     </div>
 
