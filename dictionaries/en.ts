@@ -9,6 +9,7 @@ export const en: Dictionary = {
         services: "Services",
         focus: "Focus",
         contact: "Contact",
+        settings: "Settings",
     },
     hero: {
         title: "Technology partners for digital transformation",

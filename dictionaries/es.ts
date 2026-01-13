@@ -7,6 +7,7 @@ export const es = {
         services: "Servicios",
         focus: "Enfoque",
         contact: "Contacto",
+        settings: "Configuración",
     },
     hero: {
         title: "Socios tecnológicos para la transformación digital",

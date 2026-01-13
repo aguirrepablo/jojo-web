@@ -51,7 +51,7 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
       "Custom Software"
     ],
     alternates: {
-      canonical: siteConfig.url,
+      canonical: `${siteConfig.url}${lang}`,
       languages: {
         'es': 'https://jojo.ar/es',
         'en': 'https://jojo.ar/en',
