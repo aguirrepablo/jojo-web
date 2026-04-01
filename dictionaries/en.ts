@@ -84,5 +84,28 @@ export const en: Dictionary = {
         new_chat: "New Chat",
         close: "Close chat",
         send: "Send message",
+    },
+    contact: {
+        title: "Tell us about your project",
+        subtitle: "We will get back to you as soon as possible to start together.",
+        form: {
+            name: "Name",
+            email: "Email",
+            phone: "Phone / WhatsApp",
+            company: "Company",
+            optional: "(optional)",
+            description: "Project description",
+            name_placeholder: "John Doe",
+            email_placeholder: "john@example.com",
+            phone_placeholder: "+1 234 567 8900",
+            company_placeholder: "Your company",
+            description_placeholder: "Briefly tell us what you are working on and how we can help you...",
+            submit: "Send message",
+            footer: "We respond in less than 24 business hours",
+        },
+        success: {
+            title: "Message sent!",
+            description: "We will get in touch with you shortly.\nThank you for writing to us.",
+        }
     }
 };

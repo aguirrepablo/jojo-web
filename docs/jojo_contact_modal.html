@@ -1,0 +1,242 @@
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=DM+Sans:wght@400;500&display=swap');
+
+  .jojo-backdrop {
+    position: absolute; inset: 0;
+    background: rgba(0,0,0,0.75);
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'DM Sans', sans-serif;
+    padding: 1rem;
+    box-sizing: border-box;
+  }
+
+  .jojo-modal {
+    background: #1a1a1a;
+    border: 1px solid #2e2e2e;
+    border-radius: 4px;
+    width: 100%;
+    max-width: 520px;
+    padding: 2.5rem 2.5rem 2rem;
+    position: relative;
+    box-sizing: border-box;
+    animation: slideUp 0.35s cubic-bezier(0.22,1,0.36,1);
+  }
+
+  @keyframes slideUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .jojo-close {
+    position: absolute; top: 1.25rem; right: 1.25rem;
+    background: none; border: none; cursor: pointer;
+    color: #666; font-size: 22px; line-height: 1;
+    padding: 0; transition: color 0.2s;
+  }
+  .jojo-close:hover { color: #C8473A; }
+
+  .jojo-logo {
+    display: flex; align-items: center; gap: 6px;
+    margin-bottom: 1.5rem;
+  }
+  .jojo-logo-text {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800; font-size: 22px;
+    color: #fff; letter-spacing: -0.5px;
+  }
+  .jojo-logo-dot {
+    width: 10px; height: 10px;
+    background: #C8473A; border-radius: 50%;
+    display: inline-block;
+  }
+
+  .jojo-modal h2 {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700; font-size: 22px;
+    color: #fff; margin: 0 0 0.25rem;
+  }
+  .jojo-modal p.subtitle {
+    font-size: 14px; color: #888;
+    margin: 0 0 1.75rem; line-height: 1.5;
+  }
+
+  .field-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+  .field { margin-bottom: 14px; }
+  .field label {
+    display: block;
+    font-size: 12px; font-weight: 500;
+    color: #888; letter-spacing: 0.04em;
+    text-transform: uppercase; margin-bottom: 6px;
+  }
+  .field label .optional {
+    font-weight: 400; text-transform: none;
+    color: #555; letter-spacing: 0; font-size: 11px;
+    margin-left: 4px;
+  }
+  .field input,
+  .field textarea {
+    width: 100%; box-sizing: border-box;
+    background: #111; border: 1px solid #2e2e2e;
+    border-radius: 3px; color: #fff;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px; padding: 10px 12px;
+    transition: border-color 0.2s; outline: none;
+    resize: none;
+  }
+  .field input::placeholder,
+  .field textarea::placeholder { color: #444; }
+  .field input:focus,
+  .field textarea:focus { border-color: #C8473A; }
+
+  .jojo-btn {
+    width: 100%; margin-top: 8px;
+    background: #C8473A; border: none;
+    border-radius: 3px; color: #fff;
+    font-family: 'Syne', sans-serif;
+    font-weight: 700; font-size: 15px;
+    padding: 14px; cursor: pointer;
+    letter-spacing: 0.01em;
+    transition: background 0.2s, transform 0.1s;
+  }
+  .jojo-btn:hover { background: #d94f41; }
+  .jojo-btn:active { transform: scale(0.985); }
+
+  .jojo-footer {
+    margin-top: 1rem; text-align: center;
+    font-size: 12px; color: #444;
+  }
+
+  .success-msg {
+    display: none; text-align: center;
+    padding: 2rem 0;
+  }
+  .success-msg .checkmark {
+    width: 48px; height: 48px;
+    border: 2px solid #C8473A;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    margin: 0 auto 1rem;
+    font-size: 22px; color: #C8473A;
+  }
+  .success-msg h3 {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700; font-size: 20px;
+    color: #fff; margin: 0 0 0.5rem;
+  }
+  .success-msg p { color: #888; font-size: 14px; margin: 0; }
+
+  .demo-trigger-wrap {
+    min-height: 220px;
+    background: #111;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    gap: 0.75rem;
+    border-radius: 4px;
+  }
+  .demo-label {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px; color: #555;
+  }
+  .demo-trigger {
+    background: #C8473A; border: none;
+    border-radius: 3px; color: #fff;
+    font-family: 'Syne', sans-serif;
+    font-weight: 700; font-size: 14px;
+    padding: 12px 28px; cursor: pointer;
+    letter-spacing: 0.01em;
+    transition: background 0.2s;
+  }
+  .demo-trigger:hover { background: #d94f41; }
+
+  .overlay {
+    display: none; position: fixed; inset: 0;
+    background: rgba(0,0,0,0.8);
+    align-items: center; justify-content: center;
+    padding: 1rem; box-sizing: border-box;
+    z-index: 9999;
+  }
+  .overlay.open { display: flex; }
+</style>
+
+<div  id="jojoOverlay">
+  <div class="jojo-modal" id="jojoModal">
+    <button class="jojo-close" onclick="closeModal()">&#x2715;</button>
+
+    <div id="formContent">
+      <h2>Contanos tu proyecto</h2>
+      <p class="subtitle">Te respondemos a la brevedad para arrancar juntos.</p>
+
+      <div class="field-row">
+        <div class="field">
+          <label>Nombre</label>
+          <input type="text" id="f-nombre" placeholder="Pablo Aguirre" />
+        </div>
+        <div class="field">
+          <label>Email</label>
+          <input type="email" id="f-email" placeholder="pablo@ejemplo.com" />
+        </div>
+      </div>
+
+      <div class="field-row">
+        <div class="field">
+          <label>Teléfono / WhatsApp</label>
+          <input type="tel" id="f-tel" placeholder="+54 9 351 000 0000" />
+        </div>
+        <div class="field">
+          <label>Empresa <span class="optional">(opcional)</span></label>
+          <input type="text" id="f-empresa" placeholder="Tu empresa" />
+        </div>
+      </div>
+
+      <div class="field">
+        <label>Descripción del proyecto</label>
+        <textarea id="f-desc" rows="4" placeholder="Contanos brevemente en qué estás trabajando y cómo podemos ayudarte..."></textarea>
+      </div>
+
+      <button class="jojo-btn" onclick="submitForm()">Enviar mensaje</button>
+
+      <p class="jojo-footer">Respondemos en menos de 24 hs hábiles</p>
+    </div>
+
+    <div class="success-msg" id="successMsg">
+      <div class="checkmark">&#10003;</div>
+      <h3>¡Mensaje enviado!</h3>
+      <p>Nos ponemos en contacto a la brevedad.<br>Gracias por escribirnos.</p>
+    </div>
+  </div>
+</div>
+
+<script>
+  function closeModal() {
+    document.getElementById('jojoOverlay').classList.remove('open');
+    setTimeout(() => {
+      document.getElementById('formContent').style.display = 'block';
+      document.getElementById('successMsg').style.display = 'none';
+    }, 300);
+  }
+
+  document.getElementById('jojoOverlay').addEventListener('click', function(e) {
+    if (e.target === this) closeModal();
+  });
+
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') closeModal();
+  });
+
+  function submitForm() {
+    const nombre = document.getElementById('f-nombre').value.trim();
+    const email = document.getElementById('f-email').value.trim();
+    const desc = document.getElementById('f-desc').value.trim();
+    if (!nombre || !email || !desc) {
+      alert('Por favor completá nombre, email y descripción del proyecto.');
+      return;
+    }
+    document.getElementById('formContent').style.display = 'none';
+    document.getElementById('successMsg').style.display = 'block';
+  }
+</script>

@@ -8,9 +8,10 @@ import { Dictionary } from "@/dictionaries/es";
 interface FooterProps {
     currentTheme: 'light' | 'dark';
     dict: Dictionary;
+    onOpenContact: () => void;
 }
 
-export function Footer({ currentTheme, dict }: FooterProps) {
+export function Footer({ currentTheme, dict, onOpenContact }: FooterProps) {
     const handleScroll = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
         e.preventDefault();
         const targetId = href.replace(/.*#/, "");
@@ -93,7 +94,14 @@ export function Footer({ currentTheme, dict }: FooterProps) {
                     <div>
                         <h4 className="mb-4 font-semibold text-foreground">{dict.footer.contact_title}</h4>
                         <ul className="space-y-2 text-sm text-muted-foreground">
-                            <li><a href="https://wa.me/5493541214876" target="_blank" rel="noopener noreferrer" className="hover:text-foreground transition-colors">{dict.footer.cta}</a></li>
+                            <li>
+                                <button 
+                                    onClick={onOpenContact} 
+                                    className="hover:text-foreground transition-colors cursor-pointer text-left"
+                                >
+                                    {dict.footer.cta}
+                                </button>
+                            </li>
                             <li><a href="https://www.linkedin.com/in/paguirre90/" target="_blank" rel="noopener noreferrer" className="hover:text-foreground transition-colors">LinkedIn</a></li>
                         </ul>
                     </div>

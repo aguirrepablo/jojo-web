@@ -82,6 +82,29 @@ export const es = {
         new_chat: "Nuevo Chat",
         close: "Cerrar chat",
         send: "Enviar mensaje",
+    },
+    contact: {
+        title: "Contanos tu proyecto",
+        subtitle: "Te respondemos a la brevedad para arrancar juntos.",
+        form: {
+            name: "Nombre",
+            email: "Email",
+            phone: "Teléfono / WhatsApp",
+            company: "Empresa",
+            optional: "(opcional)",
+            description: "Descripción del proyecto",
+            name_placeholder: "Pablo Aguirre",
+            email_placeholder: "pablo@ejemplo.com",
+            phone_placeholder: "+54 9 351 000 0000",
+            company_placeholder: "Tu empresa",
+            description_placeholder: "Contanos brevemente en qué estás trabajando y cómo podemos ayudarte...",
+            submit: "Enviar mensaje",
+            footer: "Respondemos en menos de 24 hs hábiles",
+        },
+        success: {
+            title: "¡Mensaje enviado!",
+            description: "Nos ponemos en contacto a la brevedad.\nGracias por escribirnos.",
+        }
     }
 };
 
