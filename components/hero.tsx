@@ -1,6 +1,7 @@
 "use client";
 
 import { Dictionary } from "@/dictionaries/es";
+import { Button } from "./ui/button";
 
 interface HeroProps {
   onOpenChat: () => void;
@@ -12,34 +13,54 @@ export function Hero({ onOpenChat, onOpenContact, dict }: HeroProps) {
   const showChat = process.env.NEXT_PUBLIC_CHAT_FEATURE_FLAG === "true";
 
   return (
-    <section id="home" className="relative pt-32 pb-20 md:pt-48 md:pb-32 overflow-hidden">
-      <div className="container mx-auto px-4 relative z-10 text-center">
-        <h1
-          className="mx-auto max-w-4xl text-5xl font-bold md:text-6xl lg:text-7xl tracking-tight mb-6 text-foreground"
-        >
-          {dict.hero.title}
+    <section id="home" className="relative min-h-screen flex items-center justify-center pt-24 overflow-hidden mesh-grid">
+      {/* Background Accents */}
+      <div className="absolute top-1/4 -left-20 w-[600px] h-[600px] bg-primary/5 rounded-full blur-[120px] pointer-events-none"></div>
+      <div className="absolute bottom-1/4 -right-20 w-[600px] h-[600px] bg-tertiary/5 rounded-full blur-[120px] pointer-events-none"></div>
+      
+      <div className="container mx-auto px-8 relative z-10 flex flex-col items-center text-center">
+        <div className="mb-10 flex items-center gap-3 px-4 py-1.5 glass-panel rounded-full">
+          <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse"></span>
+          <span className="text-[11px] uppercase tracking-[0.3em] font-headline font-bold text-primary">
+            {dict.hero.badge}
+          </span>
+        </div>
+
+        <h1 className="font-headline font-extrabold text-5xl md:text-7xl lg:text-8xl leading-[1.2] tracking-tight text-on-surface mb-10 max-w-7xl uppercase">
+          {dict.hero.title_top}<br/>
+          <span className="bg-clip-text text-transparent bg-gradient-to-r from-[#ffb3ad] to-[#ff5451] inline-block">
+            {dict.hero.title_bottom}
+          </span>
         </h1>
-        <p
-          className="mx-auto max-w-3xl text-xl text-muted-foreground mb-10 leading-relaxed whitespace-pre-line"
-        >
+
+        <p className="max-w-2xl text-lg md:text-xl text-on-surface-variant font-light mb-14 leading-relaxed opacity-80 whitespace-pre-line">
           {dict.hero.subtitle}
         </p>
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16">
-          <button
+
+        <div className="flex flex-col sm:flex-row gap-8">
+          <Button
             onClick={onOpenContact}
-            className="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground shadow hover:bg-primary/90 h-10 px-8 py-2 w-full sm:w-auto"
+            data-contact-trigger
+            className="hero-gradient text-on-primary font-headline font-bold px-12 py-7 rounded-md tracking-widest hover:scale-105 transition-all duration-300 uppercase shadow-2xl shadow-primary/30 text-sm border-none"
           >
             {dict.hero.cta}
-          </button>
+          </Button>
 
           {showChat && (
-             <button
-                onClick={onOpenChat}
-                className="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 border border-input bg-background shadow-sm hover:bg-accent hover:text-accent-foreground h-10 px-8 py-2 w-full sm:w-auto"
-              >
-                {dict.chat.title}
-              </button>
+            <Button
+              onClick={onOpenChat}
+              className="glass-panel text-on-surface px-12 py-7 rounded-md font-headline font-bold tracking-widest hover:bg-surface-variant/50 transition-all uppercase text-sm border-none"
+            >
+              {dict.chat.title}
+            </Button>
           )}
+        </div>
+
+        <div className="mt-24 flex flex-col items-center gap-4 opacity-40">
+          <span className="text-[10px] uppercase tracking-[0.4em] font-headline text-on-surface">
+            {dict.hero.scroll || "Explorar"}
+          </span>
+          <div className="w-px h-16 bg-gradient-to-b from-primary to-transparent"></div>
         </div>
       </div>
     </section>

@@ -1,6 +1,6 @@
 import { Providers } from "@/components/providers";
 import type { Metadata } from "next";
-import { Geist, Geist_Mono, Syne, DM_Sans } from "next/font/google";
+import { Syne, DM_Sans, Geist, Geist_Mono } from "next/font/google";
 import "../globals.css";
 import { getDictionary } from "../get-dictionary";
 
@@ -124,7 +124,7 @@ export default async function RootLayout({
   const dict = await getDictionary(lang);
 
   return (
-    <html lang={lang}>
+    <html lang={lang} className="dark">
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${syne.variable} ${dmSans.variable} antialiased`}
       >

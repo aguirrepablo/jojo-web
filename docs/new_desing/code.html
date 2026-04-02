@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>KINETIC AI | ENGINEERED INTELLIGENCE</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700;900&amp;family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "surface-bright": "#393939",
+                        "tertiary-container": "#009fb2",
+                        "inverse-primary": "#ba1823",
+                        "on-surface-variant": "#e4beba",
+                        "surface-container-highest": "#353534",
+                        "secondary": "#c8c6c8",
+                        "secondary-fixed-dim": "#c8c6c8",
+                        "surface": "#131313",
+                        "on-primary-container": "#5c0008",
+                        "on-secondary-fixed-variant": "#474649",
+                        "secondary-fixed": "#e4e2e4",
+                        "secondary-container": "#474649",
+                        "tertiary-fixed-dim": "#00daf3",
+                        "inverse-on-surface": "#313030",
+                        "surface-container-lowest": "#0e0e0e",
+                        "surface-tint": "#ffb3ad",
+                        "on-error": "#690005",
+                        "error-container": "#93000a",
+                        "inverse-surface": "#e5e2e1",
+                        "primary": "#ffb3ad",
+                        "on-secondary": "#303032",
+                        "on-background": "#e5e2e1",
+                        "on-primary": "#68000a",
+                        "surface-container-high": "#2a2a2a",
+                        "tertiary": "#00daf3",
+                        "on-tertiary-container": "#002f35",
+                        "surface-dim": "#131313",
+                        "on-tertiary": "#00363d",
+                        "on-secondary-fixed": "#1b1b1d",
+                        "on-tertiary-fixed-variant": "#004f58",
+                        "surface-variant": "#353534",
+                        "on-surface": "#e5e2e1",
+                        "surface-container": "#201f1f",
+                        "surface-container-low": "#1c1b1b",
+                        "on-error-container": "#ffdad6",
+                        "on-primary-fixed-variant": "#930013",
+                        "background": "#131313",
+                        "on-secondary-container": "#b6b4b7",
+                        "on-primary-fixed": "#410004",
+                        "tertiary-fixed": "#9cf0ff",
+                        "error": "#ffb4ab",
+                        "outline-variant": "#5b403e",
+                        "on-tertiary-fixed": "#001f24",
+                        "outline": "#ab8986",
+                        "primary-fixed-dim": "#ffb3ad",
+                        "primary-container": "#ff5451",
+                        "primary-fixed": "#ffdad7"
+                    },
+                    fontFamily: {
+                        "headline": ["Space Grotesk"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    },
+                    borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+                },
+            },
+        }
+    </script>
+<style>
+        .glass-panel {
+            background: rgba(53, 53, 52, 0.4);
+            backdrop-filter: blur(20px);
+            outline: 1px solid rgba(255, 179, 173, 0.1);
+        }
+        .hero-gradient {
+            background: linear-gradient(135deg, #ffb3ad 0%, #ff5451 100%);
+        }
+        .mesh-grid {
+            background-image: 
+                radial-gradient(circle at 2px 2px, rgba(255, 179, 173, 0.03) 1px, transparent 0);
+            background-size: 60px 60px;
+        }
+        .animate-subtle-float {
+            animation: float 6s ease-in-out infinite;
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface font-body selection:bg-primary selection:text-on-primary">
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 bg-surface/80 backdrop-blur-xl border-b border-white/5">
+<div class="flex justify-between items-center w-full px-8 py-5 max-w-[1440px] mx-auto">
+<div class="text-2xl font-black tracking-tighter text-on-surface font-headline uppercase flex items-center gap-2">
+<span class="w-2 h-8 bg-primary"></span>
+            KINETIC AI
+        </div>
+<div class="hidden md:flex gap-10">
+<a class="font-headline tracking-widest uppercase text-primary font-bold text-xs" href="#services">Services</a>
+<a class="font-headline tracking-widest uppercase text-on-surface/60 font-medium hover:text-on-surface transition-colors duration-300 text-xs" href="#approach">Approach</a>
+<a class="font-headline tracking-widest uppercase text-on-surface/60 font-medium hover:text-on-surface transition-colors duration-300 text-xs" href="#methodology">Methodology</a>
+<a class="font-headline tracking-widest uppercase text-on-surface/60 font-medium hover:text-on-surface transition-colors duration-300 text-xs" href="#contact">Contact</a>
+</div>
+<div class="flex items-center gap-6">
+<button class="bg-on-surface text-surface font-headline font-bold px-6 py-2 rounded-md text-xs tracking-widest uppercase hover:bg-primary transition-colors">Start Project</button>
+</div>
+</div>
+</nav>
+<main>
+<!-- Hero Section -->
+<section class="relative min-h-screen flex items-center justify-center pt-24 overflow-hidden mesh-grid">
+<!-- Background Accents -->
+<div class="absolute top-1/4 -left-20 w-[600px] h-[600px] bg-primary/5 rounded-full blur-[120px] pointer-events-none"></div>
+<div class="absolute bottom-1/4 -right-20 w-[600px] h-[600px] bg-tertiary/5 rounded-full blur-[120px] pointer-events-none"></div>
+<div class="container mx-auto px-8 relative z-10 flex flex-col items-center text-center">
+<div class="mb-10 flex items-center gap-3 px-4 py-1.5 glass-panel rounded-full border border-primary/20">
+<span class="w-1.5 h-1.5 rounded-full bg-primary animate-pulse"></span>
+<span class="text-[11px] uppercase tracking-[0.3em] font-headline font-bold text-primary">Precision Engineering Studio</span>
+</div>
+<h1 class="font-headline font-black text-6xl md:text-[10rem] leading-[0.85] tracking-tighter text-on-surface mb-10 max-w-7xl uppercase">
+                ENGINEERED<br/>
+<span class="text-transparent bg-clip-text hero-gradient">INTELLIGENCE</span>
+</h1>
+<p class="max-w-2xl text-xl md:text-2xl text-on-surface-variant font-light mb-14 leading-relaxed opacity-80">
+                We design and deploy hyper-efficient software instruments for enterprises moving at high velocity. Concept to production without friction.
+            </p>
+<div class="flex flex-col sm:flex-row gap-8">
+<a class="hero-gradient text-on-primary font-headline font-bold px-12 py-5 rounded-md tracking-widest hover:scale-105 transition-all duration-300 uppercase shadow-2xl shadow-primary/30 text-sm" href="#contact">
+                    Initiate Engagement
+                </a>
+<a class="glass-panel text-on-surface px-12 py-5 rounded-md font-headline font-bold tracking-widest hover:bg-surface-variant/50 transition-all uppercase border border-white/10 text-sm" href="#services">
+                    Our Capabilities
+                </a>
+</div>
+<div class="mt-24 flex flex-col items-center gap-4 opacity-40">
+<span class="text-[10px] uppercase tracking-[0.4em] font-headline">Scroll to explore</span>
+<div class="w-px h-16 bg-gradient-to-b from-primary to-transparent"></div>
+</div>
+</div>
+</section>
+<!-- Services Section -->
+<section class="py-40 bg-surface" id="services">
+<div class="container mx-auto px-8">
+<div class="flex flex-col md:flex-row justify-between items-end mb-32 gap-12">
+<div class="max-w-3xl">
+<span class="text-primary font-headline font-bold uppercase tracking-[0.3em] text-xs block mb-6">Execution Pillars</span>
+<h2 class="font-headline text-6xl md:text-8xl font-black tracking-tighter uppercase leading-none">
+                        TECHNICAL<br/>PRECISION.
+                    </h2>
+</div>
+<p class="max-w-md text-on-surface-variant text-xl font-light leading-relaxed border-l border-primary/30 pl-8">
+                    Our architectural framework prioritizes high-concurrency systems that remain resilient under extreme scale.
+                </p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-1px bg-white/5 border border-white/5 rounded-2xl overflow-hidden">
+<!-- Custom Software -->
+<div class="group bg-surface p-12 hover:bg-surface-container-low transition-all duration-500">
+<span class="material-symbols-outlined text-5xl text-primary mb-12 block" style="font-variation-settings: 'wght' 200;">terminal</span>
+<h3 class="font-headline text-3xl font-black uppercase mb-6 tracking-tight">Custom Software</h3>
+<p class="text-on-surface-variant font-light leading-relaxed mb-12">
+                        Bespoke enterprise applications built with modern, type-safe stacks. We prioritize maintainability and raw runtime performance.
+                    </p>
+<ul class="space-y-4 mb-12 text-sm font-medium tracking-wide text-on-surface/60">
+<li class="flex items-center gap-3"><span class="w-1 h-1 bg-primary rounded-full"></span> Enterprise ERP/CRM</li>
+<li class="flex items-center gap-3"><span class="w-1 h-1 bg-primary rounded-full"></span> Fintech Infrastructure</li>
+<li class="flex items-center gap-3"><span class="w-1 h-1 bg-primary rounded-full"></span> Real-time Data Viz</li>
+</ul>
+</div>
+<!-- Cloud Architecture -->
+<div class="group bg-surface p-12 hover:bg-surface-container-low transition-all duration-500">
+<span class="material-symbols-outlined text-5xl text-tertiary mb-12 block" style="font-variation-settings: 'wght' 200;">cloud_done</span>
+<h3 class="font-headline text-3xl font-black uppercase mb-6 tracking-tight">Cloud &amp; Infra</h3>
+<p class="text-on-surface-variant font-light leading-relaxed mb-12">
+                        Resilient serverless and microservice environments. Engineered for zero-downtime and cost-efficient global distribution.
+                    </p>
+<ul class="space-y-4 mb-12 text-sm font-medium tracking-wide text-on-surface/60">
+<li class="flex items-center gap-3"><span class="w-1 h-1 bg-tertiary rounded-full"></span> Multi-cloud Strategy</li>
+<li class="flex items-center gap-3"><span class="w-1 h-1 bg-tertiary rounded-full"></span> Kubernetes Management</li>
+<li class="flex items-center gap-3"><span class="w-1 h-1 bg-tertiary rounded-full"></span> Edge Computing</li>
+</ul>
+</div>
+<!-- Applied AI -->
+<div class="group bg-surface p-12 hover:bg-surface-container-low transition-all duration-500">
+<span class="material-symbols-outlined text-5xl text-primary-container mb-12 block" style="font-variation-settings: 'FILL' 1, 'wght' 200;">smart_toy</span>
+<h3 class="font-headline text-3xl font-black uppercase mb-6 tracking-tight">Applied AI</h3>
+<p class="text-on-surface-variant font-light leading-relaxed mb-12">
+                        Integrating LLMs, predictive modeling, and vision systems into production workflows. Moving beyond the hype into utility.
+                    </p>
+<ul class="space-y-4 mb-12 text-sm font-medium tracking-wide text-on-surface/60">
+<li class="flex items-center gap-3"><span class="w-1 h-1 bg-primary-container rounded-full"></span> LLM Orchestration</li>
+<li class="flex items-center gap-3"><span class="w-1 h-1 bg-primary-container rounded-full"></span> Computer Vision</li>
+<li class="flex items-center gap-3"><span class="w-1 h-1 bg-primary-container rounded-full"></span> Predictive Analytics</li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+<!-- Methodology Section -->
+<section class="py-40 bg-surface-container-lowest border-y border-white/5" id="methodology">
+<div class="container mx-auto px-8">
+<div class="flex flex-col lg:flex-row items-center gap-32">
+<div class="lg:w-1/2">
+<span class="text-primary font-headline font-bold uppercase tracking-[0.3em] text-xs block mb-6">Who we are</span>
+<h2 class="font-headline text-6xl md:text-8xl font-black uppercase tracking-tighter mb-12 leading-[0.9]">
+                        THE KINETIC<br/><span class="text-primary">METHOD.</span>
+</h2>
+<p class="text-xl text-on-surface-variant font-light leading-relaxed mb-12 max-w-xl">
+                        Founded by engineers for engineers. We operate as an elite tactical extension of your product team, focusing on aggressive delivery and technical excellence.
+                    </p>
+<div class="space-y-12">
+<div class="flex gap-8 group">
+<span class="font-headline text-5xl font-black text-white/10 group-hover:text-primary transition-colors duration-500">01</span>
+<div>
+<h4 class="font-headline text-2xl font-black uppercase mb-3">Senior-Only Talent</h4>
+<p class="text-on-surface-variant leading-relaxed opacity-80">
+                                    No junior proxies. Your projects are architected and executed by senior specialists with 10+ years of operational experience.
+                                </p>
+</div>
+</div>
+<div class="flex gap-8 group">
+<span class="font-headline text-5xl font-black text-white/10 group-hover:text-primary transition-colors duration-500">02</span>
+<div>
+<h4 class="font-headline text-2xl font-black uppercase mb-3">Extreme Transparency</h4>
+<p class="text-on-surface-variant leading-relaxed opacity-80">
+                                    Direct access to our codebases, task boards, and communication channels. We act as partners, not vendors.
+                                </p>
+</div>
+</div>
+<div class="flex gap-8 group">
+<span class="font-headline text-5xl font-black text-white/10 group-hover:text-primary transition-colors duration-500">03</span>
+<div>
+<h4 class="font-headline text-2xl font-black uppercase mb-3">Velocity First</h4>
+<p class="text-on-surface-variant leading-relaxed opacity-80">
+                                    Proprietary development frameworks allow us to deploy production-grade infrastructure in days, not months.
+                                </p>
+</div>
+</div>
+</div>
+</div>
+<div class="lg:w-1/2 relative">
+<div class="relative rounded-2xl overflow-hidden aspect-square border border-white/10 shadow-2xl">
+<img alt="Tech Laboratory" class="w-full h-full object-cover grayscale brightness-75 hover:scale-105 transition-transform duration-1000" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAS1yk8tINFrWfwxcmEAiNApr8YET7v11E-Z574xevxqBRI6emyEElpy8ZBGPhisnG2-ZCCC9cKnAdWgCBTa0pOQzHbgwovm__aYsqvMNcb4qWp_Ce2JRgQUqAKxlFbnS9SKgBQS7CjlPerkms_Gu-6EQBzJTofxCvPDeiLPR4tnfvR6B3EtnifRXER9alQxNgZ3rVQrrxW83GcAYYy4nghk8Y16EfB9oAcjD969fjzv5yPes7dXH7piTQ67RII2wddGfTzs8ttA6I"/>
+<div class="absolute inset-0 bg-gradient-to-t from-surface-container-lowest via-transparent to-transparent"></div>
+<div class="absolute bottom-12 left-12 glass-panel p-8 rounded-xl border border-primary/20 backdrop-blur-3xl animate-subtle-float">
+<p class="text-[10px] font-headline font-bold uppercase tracking-[0.3em] text-primary mb-3">System KPI</p>
+<p class="text-3xl font-black font-headline tracking-tighter uppercase">98.4% EFFICIENCY</p>
+<p class="text-[10px] text-on-surface/40 uppercase mt-2">Verified Architectural Throughput</p>
+</div>
+</div>
+<!-- Decorative Element -->
+<div class="absolute -top-12 -right-12 w-48 h-48 border border-white/5 rounded-full pointer-events-none"></div>
+<div class="absolute -bottom-12 -left-12 w-32 h-32 border border-primary/10 rounded-full pointer-events-none"></div>
+</div>
+</div>
+</div>
+</section>
+<!-- Contact Section -->
+<section class="py-40 px-8" id="contact">
+<div class="container mx-auto">
+<div class="bg-surface-container rounded-[2rem] border border-white/5 overflow-hidden flex flex-col lg:flex-row">
+<div class="lg:w-3/5 p-16 md:p-24 hero-gradient relative">
+<div class="absolute inset-0 mesh-grid opacity-10"></div>
+<div class="relative z-10 flex flex-col h-full justify-between">
+<div>
+<h2 class="font-headline text-6xl md:text-8xl font-black uppercase text-on-primary tracking-tighter leading-none mb-8">
+                                READY TO<br/>CONSTRUCT?
+                            </h2>
+<p class="text-on-primary/80 max-w-md text-xl font-medium">
+                                We are currently accepting new high-impact partnerships for the upcoming quarter. 
+                            </p>
+</div>
+<div class="mt-24 flex items-center gap-12">
+<div>
+<p class="text-[10px] uppercase tracking-widest text-on-primary/60 mb-2">Email Inquiries</p>
+<p class="text-xl font-headline font-bold text-on-primary">hello@kineticai.io</p>
+</div>
+<div>
+<p class="text-[10px] uppercase tracking-widest text-on-primary/60 mb-2">Global HQ</p>
+<p class="text-xl font-headline font-bold text-on-primary">Austin, TX</p>
+</div>
+</div>
+</div>
+</div>
+<div class="lg:w-2/5 p-16 md:p-24 bg-surface">
+<form class="space-y-8">
+<div>
+<label class="block text-[10px] uppercase tracking-widest text-on-surface/40 font-bold mb-3">Identification</label>
+<input class="w-full bg-transparent border-b border-white/10 py-4 focus:border-primary outline-none transition-colors font-headline text-lg" placeholder="Name or Organization" type="text"/>
+</div>
+<div>
+<label class="block text-[10px] uppercase tracking-widest text-on-surface/40 font-bold mb-3">Secure Response</label>
+<input class="w-full bg-transparent border-b border-white/10 py-4 focus:border-primary outline-none transition-colors font-headline text-lg" placeholder="email@address.com" type="email"/>
+</div>
+<div>
+<label class="block text-[10px] uppercase tracking-widest text-on-surface/40 font-bold mb-3">Project Scope</label>
+<textarea class="w-full bg-transparent border-b border-white/10 py-4 focus:border-primary outline-none transition-colors font-headline text-lg resize-none" placeholder="Briefly describe your requirements..." rows="3"></textarea>
+</div>
+<button class="w-full bg-on-surface text-surface font-headline font-black py-6 rounded-md uppercase tracking-[0.2em] hover:bg-primary transition-all duration-300 transform hover:-translate-y-1">
+                            Send Request
+                        </button>
+</form>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="relative w-full py-24 bg-surface border-t border-white/5">
+<div class="container mx-auto px-8">
+<div class="flex flex-col md:flex-row justify-between items-center gap-16">
+<div class="text-primary font-black text-3xl font-headline tracking-tighter uppercase flex items-center gap-2">
+<span class="w-1.5 h-6 bg-primary"></span>
+                KINETIC AI
+            </div>
+<div class="flex flex-wrap justify-center gap-12">
+<a class="text-on-surface/40 hover:text-primary font-headline text-[10px] tracking-[0.3em] uppercase transition-colors" href="#">Privacy</a>
+<a class="text-on-surface/40 hover:text-primary font-headline text-[10px] tracking-[0.3em] uppercase transition-colors" href="#">Security</a>
+<a class="text-on-surface/40 hover:text-primary font-headline text-[10px] tracking-[0.3em] uppercase transition-colors" href="#">Manifesto</a>
+<a class="text-on-surface/40 hover:text-primary font-headline text-[10px] tracking-[0.3em] uppercase transition-colors" href="#">Careers</a>
+</div>
+<div class="text-on-surface/40 font-headline text-[10px] tracking-[0.3em] uppercase">
+                © 2024 KINETIC ENGINEER.
+            </div>
+</div>
+</div>
+</footer>
+</body></html>
