@@ -1,88 +1,98 @@
-import { Dictionary } from "@/dictionaries/es";
+"use client";
+
 import Image from "next/image";
+import { ArrowRight } from "lucide-react";
+import { Dictionary } from "@/dictionaries/es";
+import approachImg from "@/public/assets/illustrations/approach.jpg";
 
 interface ApproachProps {
   dict: Dictionary;
+  onOpenContact: () => void;
 }
 
-export function Approach({ dict }: ApproachProps) {
-  const values = [
-    {
-      id: "01",
-      title: dict.approach.items.team.title,
-      description: dict.approach.items.team.description,
-    },
-    {
-      id: "02",
-      title: dict.approach.items.practices.title,
-      description: dict.approach.items.practices.description,
-    },
-    {
-      id: "03",
-      title: dict.approach.items.tech.title,
-      description: dict.approach.items.tech.description,
-    },
+export function Approach({ dict, onOpenContact }: ApproachProps) {
+  const items = [
+    dict.approach.items.team,
+    dict.approach.items.practices,
+    dict.approach.items.ai,
+    dict.approach.items.tech,
   ];
 
   return (
-    <section id="enfoque" className="py-40 bg-surface-container-lowest border-y border-white/5 overflow-hidden">
-      <div className="container mx-auto px-8">
-        <div className="flex flex-col lg:flex-row items-center gap-32">
-          <div className="lg:w-1/2">
-            <span className="text-primary font-headline font-bold uppercase tracking-[0.3em] text-xs block mb-6">
-              Quiénes Somos
-            </span>
-            <h2 className="font-headline text-6xl md:text-8xl font-black uppercase tracking-tighter mb-12 leading-[0.9]">
-              {dict.approach.title}<br/><span className="text-primary">{dict.approach.title_highlight}.</span>
-            </h2>
-            
-            <div className="space-y-12">
-              {values.map((value, index) => (
-                <div key={index} className="flex gap-8 group">
-                  <span className="font-headline text-5xl font-black text-white/10 group-hover:text-primary transition-colors duration-500">
-                    {value.id}
-                  </span>
-                  <div>
-                    <h4 className="font-headline text-2xl font-black uppercase mb-3">
-                      {value.title}
-                    </h4>
-                    <p className="text-on-surface-variant leading-relaxed opacity-80">
-                      {value.description}
-                    </p>
-                  </div>
-                </div>
-              ))}
+    <section id="enfoque" className="scroll-mt-28 bg-parchment">
+        <div className="rule-triple" />
+        <div className="section-editorial mx-auto max-w-content px-6 sm:px-8">
+          <div className="mx-auto max-w-2xl text-center">
+            {/* Motivo — "la hoguera" */}
+            <div className="mx-auto mb-8 h-[clamp(96px,12vw,128px)] w-[clamp(96px,12vw,128px)] overflow-hidden rounded-lg border-[0.8px] border-mist">
+              <Image
+                src={approachImg}
+                alt=""
+                placeholder="blur"
+                sizes="128px"
+                className="h-full w-full object-cover object-[52%_74%]"
+              />
             </div>
+
+            <h2 className="display text-[2rem] leading-tight text-graphite sm:text-[2.75rem]">
+              {dict.approach.title}{" "}
+              <span className="text-coral-deep">{dict.approach.title_highlight}</span>
+            </h2>
+            <p className="mt-5 text-[15px] text-ash">{dict.approach.subtitle}</p>
           </div>
 
-          <div className="lg:w-1/2 relative">
-            <div className="relative rounded-2xl overflow-hidden aspect-square border border-white/10 shadow-2xl">
-              <img 
-                alt="Tech Laboratory" 
-                className="w-full h-full object-cover grayscale brightness-75 hover:scale-105 transition-transform duration-1000" 
-                src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?q=80&w=2070&auto=format&fit=crop"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-surface-container-lowest via-transparent to-transparent"></div>
-              
-              <div className="absolute bottom-12 left-12 glass-panel p-8 rounded-xl animate-subtle-float">
-                <p className="text-[10px] font-headline font-bold uppercase tracking-[0.3em] text-primary mb-3">
-                  {dict.approach.kpi?.label || "KPI del Sistema"}
-                </p>
-                <p className="text-3xl font-black font-headline tracking-tighter uppercase">
-                  {dict.approach.kpi?.value || "98.4% EFICIENCIA"}
-                </p>
-                <p className="text-[10px] text-on-surface/40 uppercase mt-2">
-                  {dict.approach.kpi?.description || "Rendimiento Arquitectónico Verificado"}
+          <div className="frame mt-14">
+            {/* KPI */}
+            <div className="panel flex flex-col gap-1 p-6 sm:flex-row sm:items-baseline sm:justify-between">
+              <div>
+                <span className="font-mono text-caption uppercase tracking-[0.16em] text-ash">
+                  {dict.approach.kpi.label}
+                </span>
+                <p className="display mt-1 text-[1.75rem] text-graphite">
+                  {dict.approach.kpi.value}
                 </p>
               </div>
+              <span className="font-mono text-[11px] uppercase tracking-[0.12em] text-ash">
+                {dict.approach.kpi.description}
+              </span>
             </div>
-            
-            {/* Decorative Elements */}
-            <div className="absolute -top-12 -right-12 w-48 h-48 border border-white/5 rounded-full pointer-events-none"></div>
-            <div className="absolute -bottom-12 -left-12 w-32 h-32 border border-primary/10 rounded-full pointer-events-none"></div>
+
+            {/* Lista de principios */}
+            <ul className="mt-4 overflow-hidden rounded-xl bg-paper shadow-[var(--shadow-diagram)]">
+              {items.map((it, i) => (
+                <li
+                  key={i}
+                  className={`flex items-start justify-between gap-6 p-6 ${i > 0 ? "hairline-t" : ""}`}
+                >
+                  <div>
+                    <h3 className="font-sans text-[16px] font-medium tracking-[-0.01em] text-graphite">
+                      {it.title}
+                    </h3>
+                    <p className="mt-2 max-w-xl text-[14px] leading-relaxed text-ash">
+                      {it.description}
+                    </p>
+                  </div>
+                  <button
+                    onClick={onOpenContact}
+                    aria-label={dict.hero.cta}
+                    className="mt-1 grid h-8 w-8 shrink-0 place-items-center rounded-full border border-mist text-charcoal transition-colors hover:border-coral hover:text-coral-deep"
+                  >
+                    <ArrowRight size={13} strokeWidth={2} />
+                  </button>
+                </li>
+              ))}
+            </ul>
+
+            <div className="mt-6 flex justify-center">
+              <button onClick={onOpenContact} className="link-ghost">
+                {dict.hero.cta}
+                <span className="grid h-[18px] w-[18px] place-items-center rounded-full border border-fog">
+                  <ArrowRight size={11} strokeWidth={2} />
+                </span>
+              </button>
+            </div>
           </div>
         </div>
-      </div>
     </section>
   );
 }

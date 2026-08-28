@@ -1,127 +1,324 @@
 @import "tailwindcss";
-@custom-variant dark (&:is(.dark *));
 
-:root {
+/* ============================================================
+   JOJO — Sistema editorial
+   Basado en el sistema GIC (docs/new_desing/DESIGN.md) con la
+   paleta de JOJO. Light-only. Un solo acento: coral #F24444,
+   casi siempre como borde o como texto — nunca como relleno.
+
+   Reglas base (ver DESIGN.md §0):
+   1. El lienzo nunca es blanco puro: #FEFDFC. Las tarjetas sí: #FFFFFF.
+   2. Bordes de 0.8px, no 1px. Siempre #E6E1DD (mist).
+   3. La serif hace el trabajo expresivo: titulares >=27px, peso 400-500.
+   4. Marco anidado: 24px afuera con lavado, 16px adentro en blanco.
+   5. Un solo acento cromatico, coral, y nunca rellenando un boton.
+   ============================================================ */
+
+@theme {
+  /* ---------- Superficies ---------- */
+  --color-parchment: #fefdfc;   /* lienzo de pagina — blanco calido */
+  --color-paper:     #ffffff;   /* tarjetas, footer, superficies elevadas */
+  --color-linen:     #faf8f6;   /* inputs, lavados sutiles, relleno de nav */
+
+  /* ---------- Tinta y neutros (tinte calido) ---------- */
+  --color-ink-black: #171514;   /* foreground primario, maximo contraste */
+  --color-graphite:  #2c2927;   /* titulares */
+  --color-charcoal:  #444140;   /* body */
+  --color-ash:       #6b6663;   /* muted, copy descriptivo, captions */
+  --color-fog:       #b8b2ae;   /* bordes terciarios, disabled */
+  --color-mist:      #e6e1dd;   /* EL HAIRLINE — la firma visual */
+
+  /* ---------- Accion / acento (unico color de marca) ---------- */
+  --color-coral:      #f24444;  /* borde de CTA y links. Nunca relleno. */
+  --color-coral-deep: #d63a3a;  /* coral como texto sobre parchment (contraste AA) */
+  --color-dusk:       #1f1b1a;  /* relleno del unico boton solido */
+  --color-twilight:   #2c2927;  /* borde de nav / accion oscura */
+
+  /* ---------- Tipografia ---------- */
+  --font-display: var(--font-newsreader), "Iowan Old Style", "Palatino Linotype", Georgia, serif;
+  --font-sans:    var(--font-geist-sans), ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --font-mono:    var(--font-geist-mono), ui-monospace, SFMono-Regular, monospace;
+
+  /* Alias para componentes aun sin migrar (eyebrows / labels en sans) */
+  --font-headline: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-body:     var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+
+  /* Escala (par tamano / line-height). Ver DESIGN.md §2 */
+  --text-caption:    13px;  --text-caption--line-height:    1.3;
+  --text-body-sm:    15px;  --text-body-sm--line-height:    1.4;
+  --text-body:       16px;  --text-body--line-height:       1.5;
+  --text-subheading: 18px;  --text-subheading--line-height: 1.3;
+  --text-heading-sm: 27px;  --text-heading-sm--line-height: 1.35;
+  --text-heading-md: 32px;  --text-heading-md--line-height: 1.1;
+  --text-heading:    40px;  --text-heading--line-height:    1.1;
+  --text-heading-lg: 48px;  --text-heading-lg--line-height: 1.05;
+  --text-display:    56px;  --text-display--line-height:    1.05;
+
+  --tracking-display: -0.02em;  /* serif display 40-56px */
+  --tracking-tight:   -0.03em;  /* serif ~27px */
+  --tracking-ui:      -0.01em;  /* sans, todos los tamanos */
+
+  /* ---------- Forma ---------- */
+  --radius-sm:  4px;    /* iconos, chips */
+  --radius-md:  8px;    /* TODOS los botones */
+  --radius-lg:  12px;   /* tarjetas de contenido */
+  --radius-xl:  16px;   /* panel interior del marco, notificaciones */
+  --radius-2xl: 24px;   /* marco exterior de diagramas */
+
+  /* ---------- Elevacion (nunca en botones) ---------- */
+  --shadow-diagram: 0 1px 8px rgb(0 0 0 / .05);
+  --shadow-card:    0 1px 1px rgb(0 0 0 / .06), 0 4px 5px rgb(0 0 0 / .06);
+
+  /* ---------- Motion (DESIGN.md §5) ---------- */
+  --ease-standard: cubic-bezier(.4, 0, .2, 1);
+  --ease-out-slow: cubic-bezier(0, 0, .2, 1);
+
+  /* ---------- Layout ---------- */
+  --container-content: 1080px;
+  --container-wide:    1280px;
+
+  /* ============================================================
+     Alias de compatibilidad — nombres semanticos que aun usan
+     about / services / approach / header / footer / contact-modal.
+     Se eliminan a medida que cada seccion pasa al sistema nuevo.
+     ============================================================ */
+  --color-background: #fefdfc;
+  --color-foreground: #2c2927;
+  --color-surface: #ffffff;
+  --color-on-surface: #2c2927;
+  --color-surface-container-lowest: #ffffff;
+  --color-surface-container-low: #faf8f6;
+  --color-surface-container: #faf8f6;
+  --color-surface-container-high: #e6e1dd;
+  --color-surface-container-highest: #e6e1dd;
+  --color-surface-variant: #faf8f6;
+  --color-on-surface-variant: #6b6663;
+  --color-primary: #f24444;
+  --color-on-primary: #ffffff;
+  --color-primary-container: #faf8f6;
+  --color-on-primary-container: #d63a3a;
+  --color-tertiary: #d63a3a;
+  --color-on-tertiary: #ffffff;
+  --color-border: #e6e1dd;
+  --color-outline-variant: rgb(242 68 68 / .12);
   --font-size: 16px;
-  --background: #ffffff;
-  --foreground: #0f172a;
-  
-  --surface: #ffffff;
-  --on-surface: #0f172a;
-  --surface-container-low: #f8fafc;
-  --surface-container-high: #f1f5f9;
-  --surface-container-highest: #e2e8f0;
-  --surface-variant: #f1f5f9;
-  --on-surface-variant: #64748b;
-  
-  --primary: #F24444;
-  --on-primary: #ffffff;
-  --primary-container: #ffdad6;
-  --on-primary-container: #410002;
-  
-  --tertiary: #0081a7;
-  --on-tertiary: #ffffff;
-  
-  --border: #e2e8f0;
-  --outline-variant: rgba(242, 68, 68, 0.1);
-  
-  --radius-sm: 0.125rem;
-  --radius-md: 0.25rem;
-  --radius-lg: 0.5rem;
-  --radius-xl: 1rem;
 }
 
-.dark {
-  --background: #131313;
-  --foreground: #e5e2e1;
-  
-  --surface: #131313;
-  --on-surface: #e5e2e1;
-  --surface-container-lowest: #0e0e0e;
-  --surface-container-low: #1c1b1b;
-  --surface-container: #201f1f;
-  --surface-container-high: #2a2a2a;
-  --surface-container-highest: #353534;
-  --surface-variant: #353534;
-  --on-surface-variant: #e4beba;
-  
-  --primary: #ffb3ad; /* Tint for dark mode */
-  --on-primary: #68000a;
-  --primary-container: #ff5451;
-  --on-primary-container: #5c0008;
-  
-  --tertiary: #00daf3;
-  --on-tertiary: #00363d;
-  
-  --border: rgba(255, 255, 255, 0.05);
-  --outline-variant: rgba(255, 179, 173, 0.15);
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  
-  --color-surface: var(--surface);
-  --color-on-surface: var(--on-surface);
-  --color-surface-container-lowest: var(--surface-container-lowest);
-  --color-surface-container-low: var(--surface-container-low);
-  --color-surface-container: var(--surface-container);
-  --color-surface-container-high: var(--surface-container-high);
-  --color-surface-container-highest: var(--surface-container-highest);
-  --color-surface-variant: var(--surface-variant);
-  --color-on-surface-variant: var(--on-surface-variant);
-  
-  --color-primary: var(--primary);
-  --color-on-primary: var(--on-primary);
-  --color-primary-container: var(--primary-container);
-  --color-on-primary-container: var(--on-primary-container);
-  
-  --color-tertiary: var(--tertiary);
-  --color-on-tertiary: var(--on-tertiary);
-  
-  --color-border: var(--border);
-  --color-outline-variant: var(--outline-variant);
-  
-  --font-headline: var(--font-geist-sans), sans-serif;
-  --font-body: var(--font-dm-sans), sans-serif;
-  --font-sans: var(--font-geist-sans), sans-serif;
-  
-  --radius-sm: var(--radius-sm);
-  --radius-md: var(--radius-md);
-  --radius-lg: var(--radius-lg);
-  --radius-xl: var(--radius-xl);
-}
-
+/* ---------- Base ---------- */
 @layer base {
-  * {
-    @apply border-border;
+  html {
+    font-size: var(--font-size);
+    scroll-behavior: smooth;
+  }
+
+  *, ::before, ::after {
+    border-color: var(--color-mist);
   }
 
   body {
-    @apply bg-surface text-on-surface font-body selection:bg-primary selection:text-on-primary;
+    background: var(--color-parchment);
+    color: var(--color-charcoal);
+    font-family: var(--font-sans);
+    letter-spacing: var(--tracking-ui);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
   }
-  
+
+  ::selection {
+    background: rgb(242 68 68 / .16);
+    color: var(--color-ink-black);
+  }
+
+  /* Encabezados sin migrar: se mantienen en sans + mayusculas como hoy,
+     para no alterar las secciones que todavia no pasaron al sistema. */
   h1, h2, h3, h4, h5, h6 {
-    @apply font-headline uppercase tracking-tight;
+    font-family: var(--font-headline);
+    text-transform: uppercase;
+    letter-spacing: -0.02em;
   }
+
+  /* Titulares del sistema nuevo: serif, caja normal, tracking negativo.
+     Se activa con la clase .display en el elemento. */
+  .display {
+    font-family: var(--font-display);
+    font-weight: 500;              /* 400 solo a 48-56px, ver .display-xl */
+    text-transform: none;
+    letter-spacing: var(--tracking-display);
+    line-height: 1.05;
+    color: var(--color-graphite);
+    text-wrap: balance;
+    font-feature-settings: "liga" 0;
+  }
+  .display-xl { font-weight: 400; }
+}
+
+/* ---------- Componentes (recetas GIC, paleta JOJO) ---------- */
+@layer components {
+  /* Marco anidado — la firma. DESIGN.md §6 */
+  .frame {
+    background: color-mix(in srgb, var(--color-mist) 40%, transparent);
+    border: 0.8px solid var(--color-mist);
+    border-radius: var(--radius-2xl);
+    padding: 1rem;
+  }
+  .frame > .panel {
+    background: var(--color-paper);
+    border-radius: var(--radius-xl);
+    box-shadow: var(--shadow-diagram);
+  }
+
+  .btn {
+    font: 500 15px/1.4 var(--font-sans);
+    letter-spacing: -0.15px;
+    border-radius: var(--radius-md);
+    padding: 8px 12px 8px 16px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition:
+      opacity .15s var(--ease-standard),
+      color .16s var(--ease-standard),
+      border-color .16s var(--ease-standard),
+      background-color .16s var(--ease-standard);
+  }
+  /* Unica variante solida del sistema */
+  .btn-primary {
+    background: var(--color-dusk);
+    color: #fff;
+    border: 0.8px solid var(--color-twilight);
+  }
+  .btn-primary:hover { opacity: .86; }
+  /* Outline primaria — coral solo como borde y texto */
+  .btn-outline {
+    background: transparent;
+    color: var(--color-coral-deep);
+    border: 0.8px solid var(--color-coral);
+  }
+  .btn-outline:hover { background: rgb(242 68 68 / .05); }
+  /* Outline secundaria — tinta */
+  .btn-dark {
+    background: transparent;
+    color: var(--color-twilight);
+    border: 0.8px solid var(--color-twilight);
+  }
+  .btn-dark:hover { background: rgb(23 21 20 / .04); }
+
+  /* Input — radio 0 a proposito. DESIGN.md §6 */
+  .field {
+    background: var(--color-linen);
+    color: var(--color-charcoal);
+    border: 0;
+    border-bottom: 0.8px solid var(--color-fog);
+    border-radius: 0;
+    padding: 9px 2px;
+    transition: border-color .2s var(--ease-standard);
+  }
+  .field:focus {
+    border-bottom-color: var(--color-coral);
+    outline: none;
+  }
+}
+
+/* ---------- Utilidades ---------- */
+@layer utilities {
+  .hairline    { border: 0.8px solid var(--color-mist); }
+  .hairline-t  { border-top: 0.8px solid var(--color-mist); }
+  .hairline-b  { border-bottom: 0.8px solid var(--color-mist); }
+
+  /* Coral como luz, nunca como pigmento plano (DESIGN.md §1 "Ember") */
+  .glow-coral {
+    box-shadow:
+      inset 0 0 15px rgb(242 68 68 / .18),
+      inset 0 0 35px rgb(242 68 68 / .08);
+  }
+
+  /* --- Compat: utilidades que aun usan about / approach / contact-modal.
+         Reescritas para el lienzo claro; se retiran al migrar cada seccion. --- */
+  .glass-panel {
+    background: rgb(255 255 255 / .6);
+    backdrop-filter: blur(9px);
+    -webkit-backdrop-filter: blur(9px);
+    border: 0.8px solid var(--color-mist);
+  }
+  .mesh-grid {
+    background-image: radial-gradient(circle at 2px 2px, rgb(242 68 68 / .04) 1px, transparent 0);
+    background-size: 60px 60px;
+  }
+  /* Deprecado: era un gradiente coral fuera del sistema.
+     Neutralizado al boton solido; se reemplaza por .btn-primary al migrar. */
+  .hero-gradient {
+    background: var(--color-dusk);
+  }
+}
+
+/* ============================================================
+   Reestructura GIC — nav flotante, glass sobre ilustracion,
+   divisores, bandas full-bleed. (screenshots en docs/new_desing)
+   ============================================================ */
+@layer components {
+  /* Glass oscuro de la nav flotante */
+  .glass-nav {
+    background: linear-gradient(to right, rgb(20 18 17 / .86), rgb(20 18 17 / .78));
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 0.8px solid rgb(255 255 255 / .1);
+  }
+
+  /* Tarjeta glass sobre ilustracion (hero, services). Gradiente NEGRO,
+     no blanco — DESIGN.md §6. */
+  .glass-dark {
+    background: linear-gradient(to right, rgb(18 16 15 / .5), rgb(18 16 15 / .34) 65%);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border: 0.8px solid rgb(255 255 255 / .16);
+    color: #fff;
+  }
+
+  /* Link fantasma con subrayado fino (patron "Get to know us ->") */
+  .link-ghost {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font: 500 15px/1.4 var(--font-sans);
+    letter-spacing: -0.15px;
+    color: var(--color-graphite);
+    text-decoration: underline;
+    text-decoration-color: var(--color-fog);
+    text-underline-offset: 4px;
+    transition: color .16s var(--ease-standard), text-decoration-color .16s var(--ease-standard);
+  }
+  .link-ghost:hover { color: var(--color-coral-deep); text-decoration-color: var(--color-coral); }
+  .link-ghost.on-dark { color: #fff; text-decoration-color: rgb(255 255 255 / .4); }
+  .link-ghost.on-dark:hover { color: #fff; text-decoration-color: #fff; }
 }
 
 @layer utilities {
-  .glass-panel {
-    @apply bg-surface-variant/40 backdrop-blur-[20px] outline outline-1 outline-outline-variant;
+  /* Padding vertical editorial — DESIGN.md §3 (160px, 80px en menores) */
+  .section-editorial { padding-block: clamp(80px, 12vw, 160px); }
+
+  /* Divisor de triple hairline (screenshots image_2 / image_6) */
+  .rule-triple {
+    height: 7px;
+    background-image: repeating-linear-gradient(
+      to bottom,
+      var(--color-mist) 0 0.8px,
+      transparent 0.8px 3px
+    );
   }
-  
-  .hero-gradient {
-    background: linear-gradient(135deg, #ffb3ad 0%, #ff5451 100%);
+
+  /* Velos para legibilidad de texto sobre ilustracion */
+  .scrim-hero {
+    background:
+      linear-gradient(to top, rgb(18 16 15 / .58) 0%, rgb(18 16 15 / .12) 42%, transparent 70%),
+      linear-gradient(to right, rgb(18 16 15 / .34) 0%, transparent 46%);
   }
-  
-  .mesh-grid {
-    background-image: radial-gradient(circle at 2px 2px, rgba(255, 179, 173, 0.03) 1px, transparent 0);
-    background-size: 60px 60px;
+  .scrim-panel {
+    background: linear-gradient(to bottom, rgb(18 16 15 / .32), rgb(18 16 15 / .5));
   }
 }
 
-html {
-  font-size: var(--font-size);
-  scroll-behavior: smooth;
+/* Badge de reCAPTCHA oculto. Permitido por los Términos de Google si se muestra
+   la atribución en el formulario (ver contact-modal.tsx). No usar display:none. */
+.grecaptcha-badge {
+  visibility: hidden;
 }

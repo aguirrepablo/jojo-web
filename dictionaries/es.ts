@@ -21,6 +21,7 @@ export const es = {
     about: {
         title: "Manifiesto Técnico",
         description: "Somos JOJO, un equipo de desarrollo especializado en crear soluciones digitales que impulsan el crecimiento de empresas. Combinamos experiencia técnica en arquitecturas modernas con las últimas tecnologías de IA para entregar productos robustos, escalables y profesionales. Operamos como una extensión táctica de élite para tu equipo de producto.",
+        statement: "No solo escribimos código: diseñamos sistemas resilientes que dejan a una empresa moverse a la velocidad del pensamiento.",
     },
     services: {
         title: "Nuestros Servicios",

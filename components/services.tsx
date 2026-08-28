@@ -1,89 +1,51 @@
-import {
-  Code2,
-  Database,
-  Brain,
-  Terminal,
-  CloudCheck,
-  Cpu
-} from "lucide-react";
+import Image from "next/image";
+import { Terminal, Cloud, Brain } from "lucide-react";
 import { Dictionary } from "@/dictionaries/es";
+import servicesImg from "@/public/assets/illustrations/services.jpg";
 
 interface ServicesProps {
   dict: Dictionary;
 }
 
 export function Services({ dict }: ServicesProps) {
-  const services = [
-    {
-      icon: Terminal,
-      title: dict.services.items.customDevelopment.title,
-      description: dict.services.items.customDevelopment.description,
-      features: [
-        "Enterprise ERP/CRM",
-        "Fintech Infrastructure",
-        "Real-time Data Viz"
-      ],
-      color: "text-primary"
-    },
-    {
-      icon: CloudCheck,
-      title: dict.services.items.architecture.title,
-      description: dict.services.items.architecture.description,
-      features: [
-        "Multi-cloud Strategy",
-        "Kubernetes Management",
-        "Edge Computing"
-      ],
-      color: "text-tertiary"
-    },
-    {
-      icon: Brain,
-      title: dict.services.items.ai.title,
-      description: dict.services.items.ai.description,
-      features: [
-        "LLM Orchestration",
-        "Computer Vision",
-        "Predictive Analytics"
-      ],
-      color: "text-primary"
-    },
+  const items = [
+    { icon: Terminal, ...dict.services.items.customDevelopment },
+    { icon: Cloud, ...dict.services.items.architecture },
+    { icon: Brain, ...dict.services.items.ai },
   ];
 
   return (
-    <section id="servicios" className="py-40 bg-surface">
-      <div className="container mx-auto px-8">
-        <div className="flex flex-col md:flex-row justify-between items-end mb-32 gap-12">
-          <div className="max-w-3xl">
-            <span className="text-primary font-headline font-bold uppercase tracking-[0.3em] text-xs block mb-6">
-              Pilares de Ejecución
-            </span>
-            <h2 className="font-headline text-5xl md:text-8xl font-black tracking-tighter uppercase leading-none">
-              PRECISIÓN<br/>TÉCNICA.
-            </h2>
-          </div>
-          <p className="max-w-md text-on-surface-variant text-lg font-light leading-relaxed border-l border-primary/30 pl-8">
+    <section id="servicios" className="relative w-full scroll-mt-28 overflow-hidden">
+      <Image
+        src={servicesImg}
+        alt=""
+        fill
+        placeholder="blur"
+        sizes="100vw"
+        className="object-cover object-center"
+      />
+      <div className="absolute inset-0 scrim-panel" />
+
+      <div className="section-editorial relative z-10 mx-auto max-w-wide px-6 sm:px-8">
+        <div className="mx-auto max-w-2xl text-center">
+          <h2 className="display text-[2rem] leading-tight text-white sm:text-[2.75rem]">
+            {dict.services.title}
+          </h2>
+          <p className="mx-auto mt-5 max-w-xl text-[15px] leading-relaxed text-white/75">
             {dict.services.subtitle}
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-px bg-white/5 border border-white/5 rounded-2xl overflow-hidden">
-          {services.map((service, index) => (
-            <div key={index} className="group bg-surface p-12 hover:bg-surface-container-low transition-all duration-500">
-              <service.icon className={`h-12 w-12 ${service.color} mb-12 block`} strokeWidth={1.5} />
-              <h3 className="font-headline text-3xl font-black uppercase mb-6 tracking-tight">
-                {service.title}
+        <div className="mt-16 grid gap-4 md:grid-cols-3">
+          {items.map((it, i) => (
+            <div key={i} className="glass-dark rounded-xl p-6">
+              <it.icon size={22} strokeWidth={1.5} className="text-white/90" />
+              <h3 className="mt-5 font-sans text-[17px] font-medium tracking-[-0.01em] text-white">
+                {it.title}
               </h3>
-              <p className="text-on-surface-variant font-light leading-relaxed mb-12">
-                {service.description}
+              <p className="mt-3 text-[13.5px] leading-relaxed text-white/70">
+                {it.description}
               </p>
-              <ul className="space-y-4 mb-4 text-sm font-medium tracking-wide text-on-surface/60">
-                {service.features.map((feature, fIndex) => (
-                  <li key={fIndex} className="flex items-center gap-3">
-                    <span className={`w-1 h-1 rounded-full ${service.color.replace('text-', 'bg-')}`}></span>
-                    {feature}
-                  </li>
-                ))}
-              </ul>
             </div>
           ))}
         </div>

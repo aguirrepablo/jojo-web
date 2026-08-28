@@ -23,6 +23,7 @@ export const en: Dictionary = {
     about: {
         title: "Technical Manifesto",
         description: "We are JOJO, a development team specialized in creating digital solutions that drive business growth. We combine technical expertise in modern architectures with the latest AI technologies to deliver robust, scalable, and professional products. We operate as an elite tactical extension of your product team.",
+        statement: "We don't just write code: we design resilient systems that let a company move at the speed of thought.",
     },
     services: {
         title: "Our Services",
