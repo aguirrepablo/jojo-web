@@ -1,24 +1,14 @@
 import { Providers } from "@/components/providers";
 import type { Metadata } from "next";
-import { Newsreader, Geist, Geist_Mono } from "next/font/google";
+import { DM_Sans } from "next/font/google";
 import "../globals.css";
 import { getDictionary } from "../get-dictionary";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+// Familia unica del sistema — sustituto libre de Mori (ver docs/desing_new/DESIGN.md)
+const dmSans = DM_Sans({
+  variable: "--font-dm-sans",
   subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
-
-// Display serif — sustituto libre de PP Mondwest (ver docs/new_desing/README.md)
-const newsreader = Newsreader({
-  variable: "--font-newsreader",
-  subsets: ["latin"],
-  weight: ["400", "500"],
+  weight: ["400", "500", "600"],
 });
 
 const siteConfig = {
@@ -60,8 +50,9 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
     alternates: {
       canonical: `${siteConfig.url}${lang}`,
       languages: {
-        'es': 'https://jojo.ar/es',
-        'en': 'https://jojo.ar/en',
+        'es-AR': 'https://jojo.ar/es',
+        'en-US': 'https://jojo.ar/en',
+        'x-default': 'https://jojo.ar/es',
       },
     },
     openGraph: {
@@ -120,9 +111,7 @@ export default async function RootLayout({
 
   return (
     <html lang={lang}>
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} ${newsreader.variable} antialiased`}
-      >
+      <body className={`${dmSans.variable} antialiased`}>
         <Providers>
           {gaMeasurementId && (
             <>
@@ -163,10 +152,46 @@ export default async function RootLayout({
                 "areaServed": ["AR", "US", "LATAM"],
                 "availableLanguage": ["es", "en"]
               },
+              "areaServed": ["AR", "LATAM", "US", "EU"],
+              "knowsAbout": [
+                "Custom Software Development",
+                "Software Architecture",
+                "Microservices",
+                "Cloud Computing",
+                "DevOps",
+                "Artificial Intelligence",
+                "LLM Orchestration",
+                "Next.js",
+                "TypeScript"
+              ],
+              "hasOfferCatalog": {
+                "@type": "OfferCatalog",
+                "name": lang === "es" ? "Servicios de JOJO" : "JOJO Services",
+                "itemListElement": [
+                  dict.services.items.customDevelopment.title,
+                  dict.services.items.architecture.title,
+                  dict.services.items.ai.title
+                ].map((name) => ({
+                  "@type": "Offer",
+                  "itemOffered": { "@type": "Service", "name": name }
+                }))
+              },
               "sameAs": [
                 "https://www.linkedin.com/in/paguirre90/"
               ],
               "priceRange": "$$"
+            }) }}
+          />
+          <script
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{ __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "FAQPage",
+              "mainEntity": dict.faq.items.map((item) => ({
+                "@type": "Question",
+                "name": item.q,
+                "acceptedAnswer": { "@type": "Answer", "text": item.a }
+              }))
             }) }}
           />
           {children}

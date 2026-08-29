@@ -1,32 +1,29 @@
 import { MetadataRoute } from 'next'
- 
+
+const baseUrl = 'https://jojo.ar'
+
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = 'https://jojo.ar'; // Reemplazar con tu dominio final
+  const lastModified = new Date()
+  const languages = {
+    'es-AR': `${baseUrl}/es`,
+    'en-US': `${baseUrl}/en`,
+    'x-default': `${baseUrl}/es`,
+  }
 
   return [
     {
-      url: baseUrl,
-      lastModified: new Date(),
-      changeFrequency: 'yearly',
+      url: `${baseUrl}/es`,
+      lastModified,
+      changeFrequency: 'weekly',
       priority: 1,
+      alternates: { languages },
     },
     {
-      url: `${baseUrl}/#quienes-somos`,
-      lastModified: new Date(),
-      changeFrequency: 'monthly',
-      priority: 0.8,
-    },
-    {
-      url: `${baseUrl}/#servicios`,
-      lastModified: new Date(),
-      changeFrequency: 'monthly',
-      priority: 0.8,
-    },
-    {
-      url: `${baseUrl}/#enfoque`,
-      lastModified: new Date(),
-      changeFrequency: 'monthly',
-      priority: 0.8,
+      url: `${baseUrl}/en`,
+      lastModified,
+      changeFrequency: 'weekly',
+      priority: 0.9,
+      alternates: { languages },
     },
   ]
 }

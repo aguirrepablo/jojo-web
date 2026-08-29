@@ -1,9 +1,10 @@
 "use client";
 
-import Image from "next/image";
-import { ArrowRight } from "lucide-react";
+import { useRef } from "react";
+import { gsap } from "gsap";
+import { useGSAP } from "@gsap/react";
 import { Dictionary } from "@/dictionaries/es";
-import approachImg from "@/public/assets/illustrations/approach.jpg";
+import { revealUp, countUp } from "@/lib/animations";
 
 interface ApproachProps {
   dict: Dictionary;
@@ -11,6 +12,9 @@ interface ApproachProps {
 }
 
 export function Approach({ dict, onOpenContact }: ApproachProps) {
+  const scope = useRef<HTMLElement>(null);
+  const kpiRef = useRef<HTMLParagraphElement>(null);
+
   const items = [
     dict.approach.items.team,
     dict.approach.items.practices,
@@ -18,81 +22,78 @@ export function Approach({ dict, onOpenContact }: ApproachProps) {
     dict.approach.items.tech,
   ];
 
+  useGSAP(
+    () => {
+      const q = gsap.utils.selector(scope);
+      revealUp(q("[data-rise]"), { trigger: scope.current });
+      q("[data-principle]").forEach((row) =>
+        revealUp(row, { trigger: row, y: 24 }),
+      );
+      countUp(kpiRef.current, dict.approach.kpi.value, {
+        trigger: kpiRef.current,
+      });
+    },
+    { scope },
+  );
+
   return (
-    <section id="enfoque" className="scroll-mt-28 bg-parchment">
-        <div className="rule-triple" />
-        <div className="section-editorial mx-auto max-w-content px-6 sm:px-8">
-          <div className="mx-auto max-w-2xl text-center">
-            {/* Motivo — "la hoguera" */}
-            <div className="mx-auto mb-8 h-[clamp(96px,12vw,128px)] w-[clamp(96px,12vw,128px)] overflow-hidden rounded-lg border-[0.8px] border-mist">
-              <Image
-                src={approachImg}
-                alt=""
-                placeholder="blur"
-                sizes="128px"
-                className="h-full w-full object-cover object-[52%_74%]"
-              />
-            </div>
+    <section
+      ref={scope}
+      id="enfoque"
+      className="section-y scroll-mt-24 overflow-hidden"
+    >
+      <div className="mx-auto max-w-content px-4 sm:px-8">
+        <span data-rise className="eyebrow">
+          {dict.header.focus}
+        </span>
+        <h2 data-rise className="display mt-6 text-[clamp(2.25rem,6vw,4.75rem)]">
+          {dict.approach.title}{" "}
+          <span className="text-coral-bright">{dict.approach.title_highlight}</span>
+        </h2>
+        <p data-rise className="mt-5 text-body-lg text-surface-50">
+          {dict.approach.subtitle}
+        </p>
 
-            <h2 className="display text-[2rem] leading-tight text-graphite sm:text-[2.75rem]">
-              {dict.approach.title}{" "}
-              <span className="text-coral-deep">{dict.approach.title_highlight}</span>
-            </h2>
-            <p className="mt-5 text-[15px] text-ash">{dict.approach.subtitle}</p>
-          </div>
-
-          <div className="frame mt-14">
-            {/* KPI */}
-            <div className="panel flex flex-col gap-1 p-6 sm:flex-row sm:items-baseline sm:justify-between">
-              <div>
-                <span className="font-mono text-caption uppercase tracking-[0.16em] text-ash">
-                  {dict.approach.kpi.label}
-                </span>
-                <p className="display mt-1 text-[1.75rem] text-graphite">
-                  {dict.approach.kpi.value}
-                </p>
-              </div>
-              <span className="font-mono text-[11px] uppercase tracking-[0.12em] text-ash">
-                {dict.approach.kpi.description}
-              </span>
-            </div>
-
-            {/* Lista de principios */}
-            <ul className="mt-4 overflow-hidden rounded-xl bg-paper shadow-[var(--shadow-diagram)]">
-              {items.map((it, i) => (
-                <li
-                  key={i}
-                  className={`flex items-start justify-between gap-6 p-6 ${i > 0 ? "hairline-t" : ""}`}
-                >
-                  <div>
-                    <h3 className="font-sans text-[16px] font-medium tracking-[-0.01em] text-graphite">
-                      {it.title}
-                    </h3>
-                    <p className="mt-2 max-w-xl text-[14px] leading-relaxed text-ash">
-                      {it.description}
-                    </p>
-                  </div>
-                  <button
-                    onClick={onOpenContact}
-                    aria-label={dict.hero.cta}
-                    className="mt-1 grid h-8 w-8 shrink-0 place-items-center rounded-full border border-mist text-charcoal transition-colors hover:border-coral hover:text-coral-deep"
-                  >
-                    <ArrowRight size={13} strokeWidth={2} />
-                  </button>
-                </li>
-              ))}
-            </ul>
-
-            <div className="mt-6 flex justify-center">
-              <button onClick={onOpenContact} className="link-ghost">
-                {dict.hero.cta}
-                <span className="grid h-[18px] w-[18px] place-items-center rounded-full border border-fog">
-                  <ArrowRight size={11} strokeWidth={2} />
-                </span>
-              </button>
-            </div>
-          </div>
+        {/* KPI enorme */}
+        <div data-rise className="mt-20">
+          <span className="text-caption uppercase tracking-[0.2em] text-surface-50">
+            {dict.approach.kpi.label}
+          </span>
+          <p
+            ref={kpiRef}
+            className="display mt-3 text-[clamp(3rem,11vw,8rem)] leading-[0.95]"
+          >
+            {dict.approach.kpi.value}
+          </p>
+          <span className="mt-3 block text-caption uppercase tracking-[0.14em] text-surface-50">
+            {dict.approach.kpi.description}
+          </span>
         </div>
+
+        {/* Principios */}
+        <ul className="mt-20">
+          {items.map((it, i) => (
+            <li
+              key={i}
+              data-principle
+              className={`flex flex-col gap-2 py-8 sm:flex-row sm:gap-12 ${
+                i > 0 ? "hairline-t" : ""
+              }`}
+            >
+              <h3 className="shrink-0 text-subheading text-surface-cream sm:w-64">
+                {it.title}
+              </h3>
+              <p className="max-w-xl text-body text-surface-50">
+                {it.description}
+              </p>
+            </li>
+          ))}
+        </ul>
+
+        <button onClick={onOpenContact} className="pill pill-cta mt-16">
+          {dict.hero.cta}
+        </button>
+      </div>
     </section>
   );
 }

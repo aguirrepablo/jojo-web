@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JOJO — Generador Visual de Carruseles Instagram</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --just-black: #0e100f;
+      --off-black: #191919;
+      --surface-cream: #fffce1;
+      --surface-50: #7c7c6f;
+      --surface-25: #42433d;
+      --coral: #f24444;
+      --coral-bright: #ff6b6b;
+      --font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: #050606;
+      color: var(--surface-cream);
+      font-family: var(--font-family);
+      padding: 40px 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 40px;
+      max-width: 800px;
+    }
+
+    h1 {
+      font-size: 28px;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      margin-bottom: 10px;
+      color: var(--surface-cream);
+    }
+
+    header p {
+      color: var(--surface-50);
+      font-size: 15px;
+    }
+
+    .carousel-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 32px;
+      justify-content: center;
+      max-width: 1400px;
+    }
+
+    /* Diapositiva Instagram 4:5 (Escala 540x675 para preview web, render 1080x1350) */
+    .slide {
+      width: 432px;
+      height: 540px;
+      background: var(--just-black);
+      border: 1px solid var(--surface-25);
+      border-radius: 12px;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 40px 36px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.6);
+      transition: transform 0.2s ease;
+    }
+
+    .slide:hover {
+      transform: translateY(-4px);
+    }
+
+    /* Blob decorativo */
+    .blob {
+      position: absolute;
+      width: 320px;
+      height: 320px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 35% 35%, rgba(242, 68, 68, 0.45) 0%, rgba(255, 252, 225, 0.08) 55%, transparent 75%);
+      filter: blur(50px);
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .blob-top-right {
+      top: -80px;
+      right: -80px;
+    }
+
+    .blob-bottom-left {
+      bottom: -80px;
+      left: -80px;
+      background: radial-gradient(circle at 40% 40%, rgba(255, 252, 225, 0.2) 0%, rgba(242, 68, 68, 0.15) 55%, transparent 75%);
+    }
+
+    .slide-content {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      justify-content: space-between;
+    }
+
+    /* Header del Slide */
+    .slide-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .brand-logo {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 700;
+      font-size: 16px;
+      letter-spacing: -0.02em;
+    }
+
+    .brand-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--coral);
+    }
+
+    .slide-index {
+      font-size: 13px;
+      color: var(--surface-50);
+      letter-spacing: 0.05em;
+    }
+
+    /* Cuerpo del Slide */
+    .slide-body {
+      margin: auto 0;
+    }
+
+    .eyebrow {
+      font-size: 13px;
+      letter-spacing: -0.01em;
+      color: var(--surface-cream);
+      margin-bottom: 16px;
+      display: inline-block;
+    }
+    .eyebrow::before { content: "{ "; color: var(--surface-50); }
+    .eyebrow::after  { content: " }"; color: var(--surface-50); }
+
+    .display-title {
+      font-size: 32px;
+      font-weight: 600;
+      line-height: 1.05;
+      letter-spacing: -0.03em;
+      color: var(--surface-cream);
+      margin-bottom: 20px;
+    }
+
+    .display-title .highlight {
+      color: var(--coral-bright);
+    }
+
+    .hairline {
+      height: 1px;
+      background: var(--surface-25);
+      width: 100%;
+      margin: 18px 0;
+    }
+
+    .body-text {
+      font-size: 15px;
+      line-height: 1.5;
+      color: var(--surface-50);
+      letter-spacing: -0.01em;
+    }
+
+    .body-text strong {
+      color: var(--surface-cream);
+      font-weight: 500;
+    }
+
+    .number-kpi {
+      font-size: 56px;
+      font-weight: 700;
+      line-height: 1;
+      letter-spacing: -0.03em;
+      color: var(--coral-bright);
+      margin-bottom: 8px;
+    }
+
+    /* Footer del Slide */
+    .slide-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 12px;
+      color: var(--surface-50);
+      padding-top: 14px;
+      border-top: 1px solid var(--surface-25);
+    }
+
+    .pill-btn {
+      border: 1px solid var(--surface-cream);
+      padding: 6px 14px;
+      border-radius: 100px;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--surface-cream);
+      background: transparent;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .pill-cta {
+      background: var(--coral);
+      border-color: var(--coral);
+      color: var(--surface-cream);
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="eyebrow" style="font-size: 15px;">Sistema Visual JOJO</div>
+    <h1>Previsualizador de Carruseles de Instagram</h1>
+    <p>Diapositivas maquetadas exactamente con los tokens del sitio web (Just Black, Surface Cream, Acento Coral y Hairlines).</p>
+  </header>
+
+  <div class="carousel-container">
+
+    <!-- SLIDE 1: PORTADA -->
+    <div class="slide">
+      <span class="blob blob-top-right"></span>
+      <div class="slide-content">
+        <div class="slide-top">
+          <div class="brand-logo"><span class="brand-dot"></span> JOJO</div>
+          <span class="slide-index">{ 01 / 06 }</span>
+        </div>
+
+        <div class="slide-body">
+          <div class="eyebrow">Arquitectura & Negocio</div>
+          <h2 class="display-title">
+            ¿Tu empresa superó el <span class="highlight">software enlatado</span>?
+          </h2>
+          <div class="hairline"></div>
+          <p class="body-text">
+            4 señales claras de que llegó el momento de construir tu propia tecnología a medida.
+          </p>
+        </div>
+
+        <div class="slide-footer">
+          <span class="pill-btn">Deslizá &rarr;</span>
+          <span>jojo.ar</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 2: SEÑAL 1 -->
+    <div class="slide">
+      <span class="blob blob-bottom-left"></span>
+      <div class="slide-content">
+        <div class="slide-top">
+          <div class="brand-logo"><span class="brand-dot"></span> JOJO</div>
+          <span class="slide-index">{ 02 / 06 }</span>
+        </div>
+
+        <div class="slide-body">
+          <div class="number-kpi">01</div>
+          <h3 class="display-title" style="font-size: 24px;">Tus procesos se adaptan al software</h3>
+          <div class="hairline"></div>
+          <p class="body-text">
+            Si tu equipo pasa horas <strong>exportando Excels manuales</strong> y usando parches porque la herramienta estándar no cubre tu lógica real de negocio, estás perdiendo dinero y velocidad.
+          </p>
+        </div>
+
+        <div class="slide-footer">
+          <span>{ Señal #1 }</span>
+          <span>jojo.ar</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 3: SEÑAL 2 -->
+    <div class="slide">
+      <div class="slide-content">
+        <div class="slide-top">
+          <div class="brand-logo"><span class="brand-dot"></span> JOJO</div>
+          <span class="slide-index">{ 03 / 06 }</span>
+        </div>
+
+        <div class="slide-body">
+          <div class="number-kpi">02</div>
+          <h3 class="display-title" style="font-size: 24px;">Licencias por usuario que frenan tu escala</h3>
+          <div class="hairline"></div>
+          <p class="body-text">
+            En un SaaS tradicional, <strong>cada nuevo empleado o cliente incrementa tu costo fijo</strong>. El software a medida es un activo propio: la infraestructura escala sin cobrarte peaje por usuario.
+          </p>
+        </div>
+
+        <div class="slide-footer">
+          <span>{ Señal #2 }</span>
+          <span>jojo.ar</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 4: SEÑAL 3 -->
+    <div class="slide">
+      <span class="blob blob-top-right"></span>
+      <div class="slide-content">
+        <div class="slide-top">
+          <div class="brand-logo"><span class="brand-dot"></span> JOJO</div>
+          <span class="slide-index">{ 04 / 06 }</span>
+        </div>
+
+        <div class="slide-body">
+          <div class="number-kpi">03</div>
+          <h3 class="display-title" style="font-size: 24px;">Sistemas aislados sin IA integrada</h3>
+          <div class="hairline"></div>
+          <p class="body-text">
+            Cuando tu ERP no se comunica con tus pasarelas ni con tus modelos de IA, tus operaciones se fragmentan. Una <strong>arquitectura bespoke</strong> unifica tus datos en tiempo real.
+          </p>
+        </div>
+
+        <div class="slide-footer">
+          <span>{ Señal #3 }</span>
+          <span>jojo.ar</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 5: SEÑAL 4 -->
+    <div class="slide">
+      <div class="slide-content">
+        <div class="slide-top">
+          <div class="brand-logo"><span class="brand-dot"></span> JOJO</div>
+          <span class="slide-index">{ 05 / 06 }</span>
+        </div>
+
+        <div class="slide-body">
+          <div class="number-kpi">04</div>
+          <h3 class="display-title" style="font-size: 24px;">Tu tecnología es tu ventaja competitiva</h3>
+          <div class="hairline"></div>
+          <p class="body-text">
+            Si usás las mismas herramientas enlatadas que tu competencia, <strong>tu propuesta de valor es idéntica</strong>. El software propio te permite moverte a la velocidad de tus ideas.
+          </p>
+        </div>
+
+        <div class="slide-footer">
+          <span>{ Señal #4 }</span>
+          <span>jojo.ar</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 6: CIERRE & CTA -->
+    <div class="slide">
+      <span class="blob blob-bottom-left"></span>
+      <div class="slide-content">
+        <div class="slide-top">
+          <div class="brand-logo"><span class="brand-dot"></span> JOJO</div>
+          <span class="slide-index">{ 06 / 06 }</span>
+        </div>
+
+        <div class="slide-body">
+          <div class="eyebrow">Socios Tecnológicos</div>
+          <h2 class="display-title" style="font-size: 28px;">
+            Diseñamos sistemas que <span class="highlight">escalan tu negocio</span>.
+          </h2>
+          <div class="hairline"></div>
+          <p class="body-text">
+            Desarrollo de software a medida, arquitecturas modernas e integración práctica de IA.
+          </p>
+        </div>
+
+        <div class="slide-footer">
+          <span class="pill-btn pill-cta">Charlemos por DM</span>
+          <span>jojo.ar</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</body>
+</html>

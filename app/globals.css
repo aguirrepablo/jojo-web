@@ -1,324 +1,215 @@
 @import "tailwindcss";
 
 /* ============================================================
-   JOJO — Sistema editorial
-   Basado en el sistema GIC (docs/new_desing/DESIGN.md) con la
-   paleta de JOJO. Light-only. Un solo acento: coral #F24444,
-   casi siempre como borde o como texto — nunca como relleno.
+   JOJO — Sistema GSAP-style
+   Lienzo casi negro, tipografia cream gigante, formas con
+   gradiente, sin fotografia. Un unico acento cromatico: coral
+   #F24444, siempre como borde o texto — nunca como relleno.
 
-   Reglas base (ver DESIGN.md §0):
-   1. El lienzo nunca es blanco puro: #FEFDFC. Las tarjetas sí: #FFFFFF.
-   2. Bordes de 0.8px, no 1px. Siempre #E6E1DD (mist).
-   3. La serif hace el trabajo expresivo: titulares >=27px, peso 400-500.
-   4. Marco anidado: 24px afuera con lavado, 16px adentro en blanco.
-   5. Un solo acento cromatico, coral, y nunca rellenando un boton.
+   Referencia: docs/desing_new/DESIGN.md (gsap.com)
+   Adaptaciones JOJO:
+   - El "slot verde" de marca lo ocupa el coral.
+   - Familia unica: DM Sans (sustituto libre de Mori).
+   - Sin taxonomia multi-hue: una sola familia de acento.
    ============================================================ */
 
 @theme {
   /* ---------- Superficies ---------- */
-  --color-parchment: #fefdfc;   /* lienzo de pagina — blanco calido */
-  --color-paper:     #ffffff;   /* tarjetas, footer, superficies elevadas */
-  --color-linen:     #faf8f6;   /* inputs, lavados sutiles, relleno de nav */
+  --color-just-black: #0e100f;   /* lienzo de pagina, todas las secciones */
+  --color-off-black:  #191919;   /* footer, paneles anidados, code */
+  --color-surface-cream: #fffce1; /* texto primario, bordes de pill, headings */
+  --color-surface-50: #7c7c6f;   /* texto muted, captions, subheads */
+  --color-surface-25: #42433d;   /* EL HAIRLINE — divisores, bordes bajos */
 
-  /* ---------- Tinta y neutros (tinte calido) ---------- */
-  --color-ink-black: #171514;   /* foreground primario, maximo contraste */
-  --color-graphite:  #2c2927;   /* titulares */
-  --color-charcoal:  #444140;   /* body */
-  --color-ash:       #6b6663;   /* muted, copy descriptivo, captions */
-  --color-fog:       #b8b2ae;   /* bordes terciarios, disabled */
-  --color-mist:      #e6e1dd;   /* EL HAIRLINE — la firma visual */
-
-  /* ---------- Accion / acento (unico color de marca) ---------- */
-  --color-coral:      #f24444;  /* borde de CTA y links. Nunca relleno. */
-  --color-coral-deep: #d63a3a;  /* coral como texto sobre parchment (contraste AA) */
-  --color-dusk:       #1f1b1a;  /* relleno del unico boton solido */
-  --color-twilight:   #2c2927;  /* borde de nav / accion oscura */
+  /* ---------- Acento (unico color de marca) ---------- */
+  --color-coral:        #f24444; /* borde de CTA y foco. Nunca relleno. */
+  --color-coral-bright: #ff6b6b; /* coral como texto sobre negro (contraste) */
 
   /* ---------- Tipografia ---------- */
-  --font-display: var(--font-newsreader), "Iowan Old Style", "Palatino Linotype", Georgia, serif;
-  --font-sans:    var(--font-geist-sans), ui-sans-serif, system-ui, -apple-system, sans-serif;
-  --font-mono:    var(--font-geist-mono), ui-monospace, SFMono-Regular, monospace;
+  --font-sans: var(--font-dm-sans), ui-sans-serif, system-ui, -apple-system,
+    BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
 
-  /* Alias para componentes aun sin migrar (eyebrows / labels en sans) */
-  --font-headline: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
-  --font-body:     var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
-
-  /* Escala (par tamano / line-height). Ver DESIGN.md §2 */
-  --text-caption:    13px;  --text-caption--line-height:    1.3;
-  --text-body-sm:    15px;  --text-body-sm--line-height:    1.4;
-  --text-body:       16px;  --text-body--line-height:       1.5;
-  --text-subheading: 18px;  --text-subheading--line-height: 1.3;
-  --text-heading-sm: 27px;  --text-heading-sm--line-height: 1.35;
-  --text-heading-md: 32px;  --text-heading-md--line-height: 1.1;
-  --text-heading:    40px;  --text-heading--line-height:    1.1;
-  --text-heading-lg: 48px;  --text-heading-lg--line-height: 1.05;
-  --text-display:    56px;  --text-display--line-height:    1.05;
-
-  --tracking-display: -0.02em;  /* serif display 40-56px */
-  --tracking-tight:   -0.03em;  /* serif ~27px */
-  --tracking-ui:      -0.01em;  /* sans, todos los tamanos */
+  /* Escala (par tamano / line-height / tracking). Recortada del DESIGN.md
+     a rangos realistas para el contenido de JOJO. */
+  --text-caption: 14px;   --text-caption--line-height: 1.4;  --text-caption--letter-spacing: -0.01em;
+  --text-body-sm: 16px;   --text-body-sm--line-height: 1.5;  --text-body-sm--letter-spacing: -0.01em;
+  --text-body:    19px;   --text-body--line-height:    1.5;  --text-body--letter-spacing:    -0.01em;
+  --text-body-lg: 23px;   --text-body-lg--line-height: 1.38; --text-body-lg--letter-spacing: -0.011em;
+  --text-subheading: 34px; --text-subheading--line-height: 1.15; --text-subheading--letter-spacing: -0.02em;
+  --text-heading: 48px;   --text-heading--line-height: 1.05; --text-heading--letter-spacing: -0.022em;
+  --text-heading-lg: 76px; --text-heading-lg--line-height: 1;  --text-heading-lg--letter-spacing: -0.025em;
+  --text-display: 128px;  --text-display--line-height:  0.9; --text-display--letter-spacing:  -0.03em;
 
   /* ---------- Forma ---------- */
-  --radius-sm:  4px;    /* iconos, chips */
-  --radius-md:  8px;    /* TODOS los botones */
-  --radius-lg:  12px;   /* tarjetas de contenido */
-  --radius-xl:  16px;   /* panel interior del marco, notificaciones */
-  --radius-2xl: 24px;   /* marco exterior de diagramas */
-
-  /* ---------- Elevacion (nunca en botones) ---------- */
-  --shadow-diagram: 0 1px 8px rgb(0 0 0 / .05);
-  --shadow-card:    0 1px 1px rgb(0 0 0 / .06), 0 4px 5px rgb(0 0 0 / .06);
-
-  /* ---------- Motion (DESIGN.md §5) ---------- */
-  --ease-standard: cubic-bezier(.4, 0, .2, 1);
-  --ease-out-slow: cubic-bezier(0, 0, .2, 1);
+  --radius-card: 8px;
+  --radius-pill: 100px;
 
   /* ---------- Layout ---------- */
-  --container-content: 1080px;
-  --container-wide:    1280px;
+  --page-max-width: 1280px;
+  --section-gap: 80px;
+  --container-content: 1080px;  /* -> max-w-content */
+  --container-wide: 1280px;     /* -> max-w-wide */
 
-  /* ============================================================
-     Alias de compatibilidad — nombres semanticos que aun usan
-     about / services / approach / header / footer / contact-modal.
-     Se eliminan a medida que cada seccion pasa al sistema nuevo.
-     ============================================================ */
-  --color-background: #fefdfc;
-  --color-foreground: #2c2927;
-  --color-surface: #ffffff;
-  --color-on-surface: #2c2927;
-  --color-surface-container-lowest: #ffffff;
-  --color-surface-container-low: #faf8f6;
-  --color-surface-container: #faf8f6;
-  --color-surface-container-high: #e6e1dd;
-  --color-surface-container-highest: #e6e1dd;
-  --color-surface-variant: #faf8f6;
-  --color-on-surface-variant: #6b6663;
-  --color-primary: #f24444;
-  --color-on-primary: #ffffff;
-  --color-primary-container: #faf8f6;
-  --color-on-primary-container: #d63a3a;
-  --color-tertiary: #d63a3a;
-  --color-on-tertiary: #ffffff;
-  --color-border: #e6e1dd;
-  --color-outline-variant: rgb(242 68 68 / .12);
-  --font-size: 16px;
+  /* ---------- Motion ---------- */
+  --ease-standard: cubic-bezier(.4, 0, .2, 1);
+  --ease-out-expo: cubic-bezier(.16, 1, .3, 1);
 }
 
 /* ---------- Base ---------- */
 @layer base {
   html {
-    font-size: var(--font-size);
     scroll-behavior: smooth;
   }
 
   *, ::before, ::after {
-    border-color: var(--color-mist);
+    border-color: var(--color-surface-25);
   }
 
   body {
-    background: var(--color-parchment);
-    color: var(--color-charcoal);
+    background: var(--color-just-black);
+    color: var(--color-surface-cream);
     font-family: var(--font-sans);
-    letter-spacing: var(--tracking-ui);
+    font-size: var(--text-body);
+    line-height: 1.5;
+    letter-spacing: -0.01em;
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
   }
 
   ::selection {
-    background: rgb(242 68 68 / .16);
-    color: var(--color-ink-black);
+    background: rgb(242 68 68 / .22);
+    color: var(--color-surface-cream);
   }
 
-  /* Encabezados sin migrar: se mantienen en sans + mayusculas como hoy,
-     para no alterar las secciones que todavia no pasaron al sistema. */
   h1, h2, h3, h4, h5, h6 {
-    font-family: var(--font-headline);
-    text-transform: uppercase;
-    letter-spacing: -0.02em;
+    font-weight: 600;
+    letter-spacing: -0.022em;
+    color: var(--color-surface-cream);
+    text-wrap: balance;
   }
 
-  /* Titulares del sistema nuevo: serif, caja normal, tracking negativo.
-     Se activa con la clase .display en el elemento. */
+  /* Titular de exhibicion — hasta 128px, lh casi 1.0, tracking agresivo.
+     Se activa con la clase .display. */
   .display {
-    font-family: var(--font-display);
-    font-weight: 500;              /* 400 solo a 48-56px, ver .display-xl */
+    font-weight: 600;
+    letter-spacing: -0.03em;
+    line-height: 0.92;
     text-transform: none;
-    letter-spacing: var(--tracking-display);
-    line-height: 1.05;
-    color: var(--color-graphite);
-    text-wrap: balance;
-    font-feature-settings: "liga" 0;
+    color: var(--color-surface-cream);
   }
-  .display-xl { font-weight: 400; }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, ::before, ::after {
+      animation-duration: .01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: .01ms !important;
+    }
+  }
 }
 
-/* ---------- Componentes (recetas GIC, paleta JOJO) ---------- */
+/* ---------- Componentes ---------- */
 @layer components {
-  /* Marco anidado — la firma. DESIGN.md §6 */
-  .frame {
-    background: color-mix(in srgb, var(--color-mist) 40%, transparent);
-    border: 0.8px solid var(--color-mist);
-    border-radius: var(--radius-2xl);
-    padding: 1rem;
-  }
-  .frame > .panel {
-    background: var(--color-paper);
-    border-radius: var(--radius-xl);
-    box-shadow: var(--shadow-diagram);
-  }
-
-  .btn {
-    font: 500 15px/1.4 var(--font-sans);
-    letter-spacing: -0.15px;
-    border-radius: var(--radius-md);
-    padding: 8px 12px 8px 16px;
+  /* Ghost pill — control por defecto. Nunca se rellena de color. */
+  .pill {
     display: inline-flex;
     align-items: center;
-    gap: 8px;
-    transition:
-      opacity .15s var(--ease-standard),
-      color .16s var(--ease-standard),
-      border-color .16s var(--ease-standard),
-      background-color .16s var(--ease-standard);
-  }
-  /* Unica variante solida del sistema */
-  .btn-primary {
-    background: var(--color-dusk);
-    color: #fff;
-    border: 0.8px solid var(--color-twilight);
-  }
-  .btn-primary:hover { opacity: .86; }
-  /* Outline primaria — coral solo como borde y texto */
-  .btn-outline {
+    gap: 10px;
+    font: 600 18px/1.05 var(--font-sans);
+    letter-spacing: -0.01em;
+    color: var(--color-surface-cream);
     background: transparent;
-    color: var(--color-coral-deep);
-    border: 0.8px solid var(--color-coral);
+    border: 1px solid var(--color-surface-cream);
+    border-radius: var(--radius-pill);
+    padding: 15px 24px;
+    transition: border-color .2s var(--ease-standard),
+      color .2s var(--ease-standard), opacity .2s var(--ease-standard);
   }
-  .btn-outline:hover { background: rgb(242 68 68 / .05); }
-  /* Outline secundaria — tinta */
-  .btn-dark {
-    background: transparent;
-    color: var(--color-twilight);
-    border: 0.8px solid var(--color-twilight);
-  }
-  .btn-dark:hover { background: rgb(23 21 20 / .04); }
+  .pill:hover { opacity: .7; }
 
-  /* Input — radio 0 a proposito. DESIGN.md §6 */
+  /* Unica escalacion cromatica: el CTA primario va relleno de coral. */
+  .pill-cta {
+    color: var(--color-surface-cream);
+    background: var(--color-coral);
+    border: 1.5px solid var(--color-coral);
+  }
+  .pill-cta:hover {
+    opacity: 1;
+    filter: brightness(0.92);
+  }
+
+  /* Pill compacta para nav / footer */
+  .pill-sm {
+    font-size: 15px;
+    padding: 10px 18px;
+  }
+
+  /* Anotacion curly-bracket — firma de seccion. El texto va entre { }. */
+  .eyebrow {
+    display: inline-block;
+    font: 400 16px/1.15 var(--font-sans);
+    letter-spacing: -0.01em;
+    color: var(--color-surface-cream);
+  }
+  .eyebrow::before { content: "{ "; color: var(--color-surface-50); }
+  .eyebrow::after  { content: " }"; color: var(--color-surface-50); }
+
+  /* Hairline — divisor de ancho completo entre bloques. */
+  .hairline   { border: 1px solid var(--color-surface-25); }
+  .hairline-t { border-top: 1px solid var(--color-surface-25); }
+  .hairline-b { border-bottom: 1px solid var(--color-surface-25); }
+
+  /* Input dark — radio 0, solo borde inferior. */
   .field {
-    background: var(--color-linen);
-    color: var(--color-charcoal);
+    width: 100%;
+    background: transparent;
+    color: var(--color-surface-cream);
     border: 0;
-    border-bottom: 0.8px solid var(--color-fog);
+    border-bottom: 1px solid var(--color-surface-25);
     border-radius: 0;
-    padding: 9px 2px;
+    padding: 10px 2px;
+    font-size: 16px;
     transition: border-color .2s var(--ease-standard);
   }
+  .field::placeholder { color: var(--color-surface-50); }
   .field:focus {
-    border-bottom-color: var(--color-coral);
     outline: none;
+    border-bottom-color: var(--color-coral);
   }
 }
 
 /* ---------- Utilidades ---------- */
 @layer utilities {
-  .hairline    { border: 0.8px solid var(--color-mist); }
-  .hairline-t  { border-top: 0.8px solid var(--color-mist); }
-  .hairline-b  { border-bottom: 0.8px solid var(--color-mist); }
+  /* Padding vertical editorial entre secciones */
+  .section-y { padding-block: clamp(80px, 12vw, 160px); }
 
-  /* Coral como luz, nunca como pigmento plano (DESIGN.md §1 "Ember") */
-  .glow-coral {
-    box-shadow:
-      inset 0 0 15px rgb(242 68 68 / .18),
-      inset 0 0 35px rgb(242 68 68 / .08);
-  }
-
-  /* --- Compat: utilidades que aun usan about / approach / contact-modal.
-         Reescritas para el lienzo claro; se retiran al migrar cada seccion. --- */
-  .glass-panel {
-    background: rgb(255 255 255 / .6);
-    backdrop-filter: blur(9px);
-    -webkit-backdrop-filter: blur(9px);
-    border: 0.8px solid var(--color-mist);
-  }
-  .mesh-grid {
-    background-image: radial-gradient(circle at 2px 2px, rgb(242 68 68 / .04) 1px, transparent 0);
-    background-size: 60px 60px;
-  }
-  /* Deprecado: era un gradiente coral fuera del sistema.
-     Neutralizado al boton solido; se reemplaza por .btn-primary al migrar. */
-  .hero-gradient {
-    background: var(--color-dusk);
-  }
-}
-
-/* ============================================================
-   Reestructura GIC — nav flotante, glass sobre ilustracion,
-   divisores, bandas full-bleed. (screenshots en docs/new_desing)
-   ============================================================ */
-@layer components {
-  /* Glass oscuro de la nav flotante */
-  .glass-nav {
-    background: linear-gradient(to right, rgb(20 18 17 / .86), rgb(20 18 17 / .78));
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border: 0.8px solid rgb(255 255 255 / .1);
-  }
-
-  /* Tarjeta glass sobre ilustracion (hero, services). Gradiente NEGRO,
-     no blanco — DESIGN.md §6. */
-  .glass-dark {
-    background: linear-gradient(to right, rgb(18 16 15 / .5), rgb(18 16 15 / .34) 65%);
-    backdrop-filter: blur(15px);
-    -webkit-backdrop-filter: blur(15px);
-    border: 0.8px solid rgb(255 255 255 / .16);
-    color: #fff;
-  }
-
-  /* Link fantasma con subrayado fino (patron "Get to know us ->") */
-  .link-ghost {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    font: 500 15px/1.4 var(--font-sans);
-    letter-spacing: -0.15px;
-    color: var(--color-graphite);
-    text-decoration: underline;
-    text-decoration-color: var(--color-fog);
-    text-underline-offset: 4px;
-    transition: color .16s var(--ease-standard), text-decoration-color .16s var(--ease-standard);
-  }
-  .link-ghost:hover { color: var(--color-coral-deep); text-decoration-color: var(--color-coral); }
-  .link-ghost.on-dark { color: #fff; text-decoration-color: rgb(255 255 255 / .4); }
-  .link-ghost.on-dark:hover { color: #fff; text-decoration-color: #fff; }
-}
-
-@layer utilities {
-  /* Padding vertical editorial — DESIGN.md §3 (160px, 80px en menores) */
-  .section-editorial { padding-block: clamp(80px, 12vw, 160px); }
-
-  /* Divisor de triple hairline (screenshots image_2 / image_6) */
-  .rule-triple {
-    height: 7px;
-    background-image: repeating-linear-gradient(
-      to bottom,
-      var(--color-mist) 0 0.8px,
-      transparent 0.8px 3px
+  /* Forma 3D con gradiente — decorativa, detras del texto.
+     Marcar el elemento con aria-hidden y pointer-events:none. */
+  .blob {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(60px);
+    pointer-events: none;
+    opacity: .5;
+    background: radial-gradient(
+      circle at 35% 35%,
+      rgb(242 68 68 / .55),
+      rgb(255 252 225 / .12) 55%,
+      transparent 75%
     );
   }
-
-  /* Velos para legibilidad de texto sobre ilustracion */
-  .scrim-hero {
-    background:
-      linear-gradient(to top, rgb(18 16 15 / .58) 0%, rgb(18 16 15 / .12) 42%, transparent 70%),
-      linear-gradient(to right, rgb(18 16 15 / .34) 0%, transparent 46%);
-  }
-  .scrim-panel {
-    background: linear-gradient(to bottom, rgb(18 16 15 / .32), rgb(18 16 15 / .5));
+  .blob-cream {
+    background: radial-gradient(
+      circle at 40% 40%,
+      rgb(255 252 225 / .28),
+      rgb(242 68 68 / .12) 55%,
+      transparent 75%
+    );
   }
 }
 
-/* Badge de reCAPTCHA oculto. Permitido por los Términos de Google si se muestra
-   la atribución en el formulario (ver contact-modal.tsx). No usar display:none. */
+/* Badge de reCAPTCHA oculto. Permitido por los Terminos de Google si se muestra
+   la atribucion en el formulario (ver contact-modal.tsx). No usar display:none. */
 .grecaptcha-badge {
   visibility: hidden;
 }
