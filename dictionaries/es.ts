@@ -151,6 +151,7 @@ export const es = {
             description_placeholder: "Describe brevemente tus requerimientos...",
             submit: "Enviar Solicitud",
             footer: "Respondemos en menos de 24 hs hábiles",
+            error: "No pudimos enviar tu mensaje. Volvé a intentarlo o escribinos a hola@jojo.ar",
         },
         success: {
             title: "¡Solicitud Enviada!",

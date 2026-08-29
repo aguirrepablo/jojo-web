@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { X, Check } from "lucide-react";
+import { useGoogleReCaptcha } from "react-google-recaptcha-v3";
 import { Dictionary } from "@/dictionaries/es";
 
 interface ContactModalProps {
@@ -12,8 +13,10 @@ interface ContactModalProps {
 }
 
 export function ContactModal({ isOpen, onClose, dict, lang }: ContactModalProps) {
+  const { executeRecaptcha } = useGoogleReCaptcha();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
+  const [hasError, setHasError] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -45,15 +48,20 @@ export function ContactModal({ isOpen, onClose, dict, lang }: ContactModalProps)
     if (!formData.name || !formData.email || !formData.description) {
       return;
     }
+    setHasError(false);
     setIsSubmitting(true);
 
     try {
+      const recaptchaToken = executeRecaptcha
+        ? await executeRecaptcha("contact_form")
+        : undefined;
+
       const response = await fetch(`/${lang}/api/contact`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(formData),
+        body: JSON.stringify({ ...formData, recaptchaToken }),
       });
 
       if (!response.ok) {
@@ -63,6 +71,7 @@ export function ContactModal({ isOpen, onClose, dict, lang }: ContactModalProps)
       setIsSuccess(true);
     } catch (error) {
       console.error("Error submitting form:", error);
+      setHasError(true);
     } finally {
       setIsSubmitting(false);
     }
@@ -207,6 +216,12 @@ export function ContactModal({ isOpen, onClose, dict, lang }: ContactModalProps)
                 >
                   {isSubmitting ? "…" : dict.contact.form.submit}
                 </button>
+
+                {hasError && (
+                  <p className="text-center text-body-sm text-coral-bright">
+                    {dict.contact.form.error}
+                  </p>
+                )}
 
                 <p className="text-center text-caption uppercase tracking-[0.12em] text-surface-50">
                   {dict.contact.form.footer}

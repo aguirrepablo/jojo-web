@@ -153,6 +153,7 @@ export const en: Dictionary = {
             description_placeholder: "Briefly describe your requirements...",
             submit: "Send Request",
             footer: "We respond in less than 24 business hours",
+            error: "We couldn't send your message. Please try again or email us at hola@jojo.ar",
         },
         success: {
             title: "Request Sent!",
