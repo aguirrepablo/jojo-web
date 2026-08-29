@@ -157,6 +157,12 @@ export const es = {
             title: "¡Solicitud Enviada!",
             description: "Nos ponemos en contacto a la brevedad para iniciar el engagement.\nGracias por elegir nuestro enfoque de ingeniería.",
         }
+    },
+    notFound: {
+        eyebrow: "Error 404",
+        title: "Esta página se nos escapó",
+        description: "El enlace que seguiste no existe o cambió de lugar. No es tu culpa: a veces movemos las cosas para dejar todo más prolijo.",
+        back: "Volver al inicio",
     }
 };
 

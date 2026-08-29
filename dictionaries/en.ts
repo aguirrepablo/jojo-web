@@ -159,5 +159,11 @@ export const en: Dictionary = {
             title: "Request Sent!",
             description: "We will get in touch shortly to initiate the engagement.\nThank you for choosing our engineering approach.",
         }
+    },
+    notFound: {
+        eyebrow: "Error 404",
+        title: "This page got away from us",
+        description: "The link you followed doesn't exist or moved somewhere else. Not your fault — sometimes we shuffle things around to keep the place tidy.",
+        back: "Back to home",
     }
 };

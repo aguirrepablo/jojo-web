@@ -20,7 +20,13 @@ export function proxy(request: NextRequest) {
     (locale) => pathname.startsWith(`/${locale}/`) || pathname === `/${locale}`
   );
 
-  if (pathnameHasLocale) return;
+  if (pathnameHasLocale) {
+    // Propaga el pathname para que `not-found.tsx` (que no recibe params)
+    // pueda deducir el idioma en el servidor.
+    const headers = new Headers(request.headers);
+    headers.set("x-pathname", pathname);
+    return NextResponse.next({ request: { headers } });
+  }
 
   // Redirect if there is no locale
   const locale = getLocale(request);
