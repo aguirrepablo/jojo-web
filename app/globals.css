@@ -153,6 +153,8 @@
   }
   .eyebrow::before { content: "{ "; color: var(--color-surface-50); }
   .eyebrow::after  { content: " }"; color: var(--color-surface-50); }
+  .eyebrow-plain::before,
+  .eyebrow-plain::after { content: none; }
 
   /* Hairline — divisor de ancho completo entre bloques. */
   .hairline   { border: 1px solid var(--color-surface-25); }

@@ -54,7 +54,7 @@ export function Hero({ onOpenContact, dict }: HeroProps) {
       />
 
       <div className="relative z-10 mx-auto w-full max-w-wide">
-        <span data-rise className="eyebrow">
+        <span data-rise className="eyebrow eyebrow-plain">
           {dict.hero.badge}
         </span>
 
