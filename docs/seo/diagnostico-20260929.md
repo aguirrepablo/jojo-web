@@ -15,7 +15,7 @@ Host canónico: **`https://jojo.ar`** (sin www).
 | 5 | Redirect `/` → `/es` permanente | Importante | ❌ Descartada (ver nota) |
 | 6 | Selector de idioma con links reales | Importante | ✅ Código (8b6dd1a) |
 | 7 | Fixes de JSON-LD | Importante | ✅ Verificado (Rich Results OK) |
-| 8 | H1 visible con keyword | Importante | ⬜ |
+| 8 | H1 visible con keyword | Importante | ✅ Código ("Software a medida con IA.") |
 | 9 | Íconos: sacar duplicado y agregar apple-touch-icon | Menor | ✅ Código (8b6dd1a) |
 | 10 | Limpieza: `meta keywords` | Menor | ✅ Código (8b6dd1a) |
 | 11 | Search Console | Post-deploy | ⬜ |
@@ -244,7 +244,8 @@ Usarla en `metadataBase`, `sitemap.ts`, `robots.ts` y el JSON-LD. `FAQPage` se d
 
 También conviene reemplazar el badge "Estudio de Ingeniería de Precisión" por algo como "Desarrollo de software · Córdoba, Argentina".
 
-- [ ] El H1 es visible y contiene "desarrollo de software a medida"
+- [x] H1 visible: "Software a medida con IA.". Badge: "Desarrollo de software · Villa Carlos Paz, Córdoba".
+- [x] Copy de todo el sitio reescrito con tono local (foco Villa Carlos Paz); "Arquitectura e Integración" pasó a "Integración de Sistemas" (revisar slug de la tarea 12).
 
 ---
 

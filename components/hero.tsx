@@ -59,22 +59,13 @@ export function Hero({ onOpenContact, dict }: HeroProps) {
         </span>
 
         <h1 className="display mt-8 text-[clamp(3rem,13vw,9.5rem)]">
-          {/* Texto real del H1 para buscadores / lectores de pantalla; los
-              renglones visuales van aria-hidden para no leerlo dos veces. */}
-          <span className="sr-only">{dict.hero.h1}</span>
-          <span aria-hidden className="-mb-[0.2em] block overflow-hidden">
-            <span
-              data-line
-              className="block pb-[0.2em] lowercase first-letter:uppercase"
-            >
+          <span className="-mb-[0.2em] block overflow-hidden">
+            <span data-line className="block pb-[0.2em]">
               {dict.hero.title_top}
             </span>
-          </span>
-          <span aria-hidden className="-mb-[0.2em] block overflow-hidden">
-            <span
-              data-line
-              className="block pb-[0.2em] lowercase text-coral-bright first-letter:uppercase"
-            >
+          </span>{" "}
+          <span className="-mb-[0.2em] block overflow-hidden">
+            <span data-line className="block pb-[0.2em] text-coral-bright">
               {dict.hero.title_bottom}
             </span>
           </span>
