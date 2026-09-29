@@ -123,7 +123,7 @@ export default async function RootLayout({
               },
               "contactPoint": {
                 "@type": "ContactPoint",
-                "telephone": "+54-9-3541-214876",
+                "telephone": "+54-9-3541-61-8385",
                 "email": "hola@jojo.ar",
                 "contactType": "customer service",
                 "areaServed": ["AR", "US", "LATAM"],
