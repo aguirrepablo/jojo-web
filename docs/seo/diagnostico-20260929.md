@@ -14,7 +14,7 @@ Host canónico: **`https://jojo.ar`** (sin www).
 | 4 | Metadata en `<head>` (`htmlLimitedBots`) | Importante | ✅ Código (8b6dd1a) |
 | 5 | Redirect `/` → `/es` permanente | Importante | ❌ Descartada (ver nota) |
 | 6 | Selector de idioma con links reales | Importante | ✅ Código (8b6dd1a) |
-| 7 | Fixes de JSON-LD | Importante | 🟡 Falta `email` |
+| 7 | Fixes de JSON-LD | Importante | ✅ Verificado (Rich Results OK) |
 | 8 | H1 visible con keyword | Importante | ⬜ |
 | 9 | Íconos: sacar duplicado y agregar apple-touch-icon | Menor | ✅ Código (8b6dd1a) |
 | 10 | Limpieza: `meta keywords` | Menor | ✅ Código (8b6dd1a) |
@@ -229,7 +229,7 @@ export const SITE_URL = 'https://jojo.ar';
 
 Usarla en `metadataBase`, `sitemap.ts`, `robots.ts` y el JSON-LD. `FAQPage` se deja como está.
 
-**Hecho:** `logo`, `image` y `SITE_URL`. La causa del `//` era la barra final de `siteConfig.url`. **Pendiente:** `email` (confirmar dirección) y `sameAs`.
+**Hecho:** `logo`, `image` y `SITE_URL`. La causa del `//` era la barra final de `siteConfig.url`. `email` agregado (`hola@jojo.ar`). **Pendiente:** `sameAs` si aparecen perfiles de empresa.
 
 - [ ] Rich Results Test sin errores y sin `//` en las URLs
 

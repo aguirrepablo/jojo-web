@@ -114,6 +114,7 @@ export default async function RootLayout({
               "logo": `${SITE_URL}/logo.png`,
               "image": OG_IMAGE,
               "description": dict.metadata.description,
+              "email": "hola@jojo.ar",
               "address": {
                 "@type": "PostalAddress",
                 "addressLocality": "Villa Carlos Paz",
@@ -123,6 +124,7 @@ export default async function RootLayout({
               "contactPoint": {
                 "@type": "ContactPoint",
                 "telephone": "+54-9-3541-214876",
+                "email": "hola@jojo.ar",
                 "contactType": "customer service",
                 "areaServed": ["AR", "US", "LATAM"],
                 "availableLanguage": ["es", "en"]
