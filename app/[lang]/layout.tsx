@@ -129,7 +129,7 @@ export default async function RootLayout({
                 "areaServed": ["AR", "US", "LATAM"],
                 "availableLanguage": ["es", "en"]
               },
-              "areaServed": ["AR", "LATAM", "US", "EU"],
+              "areaServed": ["Villa Carlos Paz", "Valle de Punilla", "Córdoba", "AR", "LATAM", "US", "EU"],
               "knowsAbout": [
                 "Custom Software Development",
                 "Software Architecture",

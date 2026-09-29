@@ -1,7 +1,7 @@
 export const es = {
     metadata: {
         title: "JOJO | Software a medida con IA en Villa Carlos Paz, Córdoba",
-        description: "Desarrollamos software a medida con inteligencia artificial para negocios de Villa Carlos Paz y Córdoba. Dejá atrás las planillas y el trabajo manual. Trato directo, cara a cara.",
+        description: "Desarrollamos software a medida con inteligencia artificial. Desde Villa Carlos Paz y el Valle de Punilla, Córdoba, para negocios de toda Argentina y el mundo. Trato directo con quien lo desarrolla.",
     },
     header: {
         services: "Servicios",
@@ -16,17 +16,17 @@ export const es = {
         close: "Cerrar",
     },
     hero: {
-        badge: "Desarrollo de software · Villa Carlos Paz, Córdoba",
+        badge: "Desarrollo de software · Desde Villa Carlos Paz al mundo",
         scroll: "Explorar",
         title_top: "Software a medida",
         title_bottom: "con IA.",
         title: "Socios tecnológicos para la transformación digital",
-        subtitle: "Hacemos el sistema que tu negocio necesita para dejar atrás las planillas y el trabajo manual. Estamos en Villa Carlos Paz: trato directo, cara a cara, con quien lo desarrolla.",
+        subtitle: "Hacemos el sistema que tu negocio necesita para dejar atrás las planillas y el trabajo manual. Trato directo con quien lo desarrolla: en persona si estás en Punilla o Córdoba, y remoto desde cualquier lugar.",
         cta: "Contanos tu proyecto",
     },
     about: {
         title: "Cómo trabajamos",
-        description: "JOJO es un estudio de desarrollo de software de Villa Carlos Paz. Es un proyecto personal y cercano: trabajás directamente con quien hace tu sistema, sin intermediarios, y cuando un trabajo lo pide sumamos colaboradores de confianza. Usamos tecnología moderna e inteligencia artificial para que tu negocio funcione mejor, con menos trabajo manual y menos errores.",
+        description: "JOJO es un estudio de desarrollo de software con base en Villa Carlos Paz que trabaja con clientes de cualquier lugar. Es un proyecto personal y cercano: trabajás directamente con quien hace tu sistema, sin intermediarios, y cuando un trabajo lo pide sumamos colaboradores de confianza. Usamos tecnología moderna e inteligencia artificial para que tu negocio funcione mejor, con menos trabajo manual y menos errores.",
         statement: "No solo escribimos código: hacemos sistemas que le ahorran tiempo a tu negocio.",
     },
     services: {
@@ -101,8 +101,8 @@ export const es = {
                 a: "Directo: hablás siempre con quien desarrolla tu sistema, por WhatsApp, videollamada o en persona, sin intermediarios ni vueltas. Y si ya tenés un equipo técnico, nos sumamos a su forma de trabajar.",
             },
             {
-                q: "¿Dónde están? ¿Trabajan con negocios de Villa Carlos Paz?",
-                a: "Sí, somos de Villa Carlos Paz, Córdoba. Nos juntamos en persona con negocios de Carlos Paz, Córdoba capital y alrededores, y también trabajamos a distancia con clientes de cualquier lugar. Nos podés contratar por proyecto cerrado o por horas.",
+                q: "¿Dónde están? ¿Trabajan de forma remota?",
+                a: "Estamos en Villa Carlos Paz, Córdoba. Si tu negocio está en Carlos Paz, el Valle de Punilla o Córdoba capital, nos podemos juntar en persona. Si estás en otra parte de Argentina o del mundo, trabajamos 100% remoto con el mismo trato directo. Nos podés contratar por proyecto cerrado o por horas.",
             },
         ],
     },
@@ -110,7 +110,7 @@ export const es = {
         services_title: "Servicios",
         contact_title: "Contacto",
         rights: "© 2026 JOJO.",
-        description: "Desarrollo de software a medida e inteligencia artificial para negocios y empresas. Desde Villa Carlos Paz, Córdoba.",
+        description: "Desarrollo de software a medida e inteligencia artificial para negocios y empresas. Desde Villa Carlos Paz, Córdoba, para todo el mundo.",
         location: "Villa Carlos Paz, Córdoba, Argentina",
         cta: "Enviar consulta",
         links: {
