@@ -1,0 +1,10 @@
+{
+  "mcpServers": {
+    "instagram": {
+      "command": "node",
+      "args": [
+        "C:\\Users\\peagu\\Workspace\\jojo\\jojo-web\\instagram-work\\mcp-server\\index.js"
+      ]
+    }
+  }
+}

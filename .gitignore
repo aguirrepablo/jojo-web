@@ -50,3 +50,6 @@ tempo.txt
 .env.*.local
 .env.example
 .env.*.example
+
+# Trabajo de Instagram (fuera del repo)
+instagram-work/
