@@ -21,7 +21,7 @@ export const es = {
         title_top: "Software a medida",
         title_bottom: "con IA.",
         title: "Socios tecnológicos para la transformación digital",
-        subtitle: "Hacemos el sistema que tu negocio necesita para dejar atrás las planillas y el trabajo manual. Trato directo con quien lo desarrolla: en persona si estás en Punilla o Córdoba, y remoto desde cualquier lugar.",
+        subtitle: "Hacemos el sistema que tu negocio necesita para dejar atrás las planillas y el trabajo manual. Siempre hablás directo con quien lo desarrolla, estés en Punilla o en la otra punta del mundo.",
         cta: "Contanos tu proyecto",
     },
     about: {
