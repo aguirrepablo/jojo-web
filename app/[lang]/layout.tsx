@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import { DM_Sans } from "next/font/google";
 import "../globals.css";
 import { getDictionary } from "../get-dictionary";
+import { SITE_URL } from "@/lib/site";
 
 // Familia unica del sistema — sustituto libre de Mori (ver docs/desing_new/DESIGN.md)
 const dmSans = DM_Sans({
@@ -11,60 +12,37 @@ const dmSans = DM_Sans({
   weight: ["400", "500", "600"],
 });
 
-const siteConfig = {
-  url: "https://jojo.ar/",
-  ogImage: "https://jojo.ar/og.svg",
-};
+const OG_IMAGE = `${SITE_URL}/og.png`;
 
 export async function generateMetadata({ params }: { params: Promise<{ lang: string }> }): Promise<Metadata> {
   const { lang } = await params;
   const dict = await getDictionary(lang);
 
   return {
-    metadataBase: new URL(siteConfig.url),
+    metadataBase: new URL(SITE_URL),
     title: {
       default: dict.metadata.title,
       template: `%s | ${dict.metadata.title}`,
     },
     description: dict.metadata.description,
-    keywords: [
-      "Desarrollo de Software",
-      "Inteligencia Artificial",
-      "Consultora de Software",
-      "Socios tecnológicos",
-      "Next.js",
-      "React",
-      ".NET",
-      "NestJS",
-      "Transformación Digital",
-      "Argentina",
-      "Córdoba",
-      "Software a medida",
-      "Software Development",
-      "Artificial Intelligence",
-      "Software Consultancy",
-      "Technology Partners",
-      "Digital Transformation",
-      "Custom Software"
-    ],
     alternates: {
-      canonical: `${siteConfig.url}${lang}`,
+      canonical: `${SITE_URL}/${lang}`,
       languages: {
-        'es-AR': 'https://jojo.ar/es',
-        'en-US': 'https://jojo.ar/en',
-        'x-default': 'https://jojo.ar/es',
+        'es-AR': `${SITE_URL}/es`,
+        'en-US': `${SITE_URL}/en`,
+        'x-default': `${SITE_URL}/es`,
       },
     },
     openGraph: {
       type: "website",
       locale: lang === 'es' ? 'es_AR' : 'en_US',
-      url: `${siteConfig.url}${lang}`,
+      url: `${SITE_URL}/${lang}`,
       siteName: "JOJO",
       title: dict.metadata.title,
       description: dict.metadata.description,
       images: [
         {
-          url: siteConfig.ogImage,
+          url: OG_IMAGE,
           width: 1200,
           height: 630,
           alt: "JOJO",
@@ -75,10 +53,7 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
       card: "summary_large_image",
       title: dict.metadata.title,
       description: dict.metadata.description,
-      images: [siteConfig.ogImage],
-    },
-    icons: {
-      icon: "/favicon.ico",
+      images: [OG_IMAGE],
     },
     robots: {
       index: true,
@@ -135,9 +110,9 @@ export default async function RootLayout({
               "@context": "https://schema.org",
               "@type": "ProfessionalService",
               "name": "JOJO",
-              "url": siteConfig.url,
-              "logo": `${siteConfig.url}/assets/svg/jojo_logo_dark.svg`,
-              "image": siteConfig.ogImage,
+              "url": SITE_URL,
+              "logo": `${SITE_URL}/logo.png`,
+              "image": OG_IMAGE,
               "description": dict.metadata.description,
               "address": {
                 "@type": "PostalAddress",

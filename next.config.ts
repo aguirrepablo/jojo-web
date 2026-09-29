@@ -28,6 +28,8 @@ const securityHeaders = [
 ];
 
 const nextConfig: NextConfig = {
+  // Metadata bloqueante en <head> para todos los user agents, no solo los bots conocidos
+  htmlLimitedBots: /.*/,
   async headers() {
     return [
       {

@@ -38,7 +38,7 @@ export function proxy(request: NextRequest) {
 
 export const config = {
   matcher: [
-    // Skip all internal paths (_next) and public assets (assets, favicon, etc)
-    '/((?!_next|assets|favicon.ico|og.svg|robots.txt|sitemap.xml|manifest.ts).*)',
+    // Excluye internos de Next y cualquier ruta con extensión (og.png, manifest.webmanifest, robots.txt, etc.)
+    '/((?!_next|_vercel|.*\\..*).*)',
   ],
 };

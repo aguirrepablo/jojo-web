@@ -5,10 +5,10 @@ export default function manifest(): MetadataRoute.Manifest {
     name: 'JOJO - Socios tecnológicos',
     short_name: 'JOJO',
     description: 'Transformamos ideas en soluciones digitales inteligentes.',
-    start_url: '/',
+    start_url: '/es',
     display: 'standalone',
-    background_color: '#ffffff',
-    theme_color: '#000000',
+    background_color: '#0e100f',
+    theme_color: '#0e100f',
     icons: [
       {
         src: '/favicon.ico',

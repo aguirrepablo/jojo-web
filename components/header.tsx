@@ -5,7 +5,7 @@ import Image from "next/image";
 import { Menu, X } from "lucide-react";
 import { useEffect, useState } from "react";
 import { Dictionary } from "@/dictionaries/es";
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
 
 interface HeaderProps {
   dict: Dictionary;
@@ -16,7 +16,6 @@ export function Header({ dict, lang }: HeaderProps) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [hidden, setHidden] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const router = useRouter();
   const pathname = usePathname();
 
   useEffect(() => {
@@ -39,11 +38,9 @@ export function Header({ dict, lang }: HeaderProps) {
     setIsMenuOpen(false);
   };
 
-  const toggleLang = () => {
-    const next = lang === "es" ? "en" : "es";
-    router.push(pathname.replace(`/${lang}`, `/${next}`));
-    setIsMenuOpen(false);
-  };
+  const nextLang = lang === "es" ? "en" : "es";
+  // <a> real (no <button>) para que los crawlers descubran la otra versión
+  const langHref = pathname.replace(`/${lang}`, `/${nextLang}`);
 
   const links = [
     { label: dict.header.services, id: "servicios" },
@@ -92,13 +89,15 @@ export function Header({ dict, lang }: HeaderProps) {
         </nav>
 
         <div className="flex items-center gap-3">
-          <button
-            onClick={toggleLang}
+          <Link
+            href={langHref}
+            hrefLang={nextLang}
+            onClick={() => setIsMenuOpen(false)}
             aria-label="Language"
             className="text-body-sm text-surface-cream/60 transition-colors hover:text-surface-cream"
           >
-            {lang === "es" ? "EN" : "ES"}
-          </button>
+            {nextLang.toUpperCase()}
+          </Link>
 
           <button
             onClick={() => setIsMenuOpen((v) => !v)}
