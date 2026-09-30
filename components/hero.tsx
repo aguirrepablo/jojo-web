@@ -54,11 +54,7 @@ export function Hero({ onOpenContact, dict }: HeroProps) {
       />
 
       <div className="relative z-10 mx-auto w-full max-w-wide">
-        <span data-rise className="eyebrow eyebrow-plain">
-          {dict.hero.badge}
-        </span>
-
-        <h1 className="display mt-8 text-[clamp(3rem,13vw,9.5rem)]">
+        <h1 className="display text-[clamp(3rem,13vw,9.5rem)]">
           <span className="-mb-[0.2em] block overflow-hidden">
             <span data-line className="block pb-[0.2em]">
               {dict.hero.title_top}

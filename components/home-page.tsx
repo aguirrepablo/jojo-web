@@ -49,7 +49,7 @@ export function HomePage({ dict, lang }: HomePageProps) {
             lang={lang}
           />
           <About dict={dict} />
-          <Services dict={dict} onOpenContact={openContact} />
+          <Services dict={dict} />
           <Approach dict={dict} onOpenContact={openContact} />
           <Faq dict={dict} />
         </main>

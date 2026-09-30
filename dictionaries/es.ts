@@ -16,7 +16,6 @@ export const es = {
         close: "Cerrar",
     },
     hero: {
-        badge: "Desarrollo de software · Desde Villa Carlos Paz al mundo",
         scroll: "Explorar",
         title_top: "Software a medida",
         title_bottom: "con IA.",
@@ -36,14 +35,17 @@ export const es = {
             customDevelopment: {
                 title: "Desarrollo a Medida",
                 description: "Sistemas de gestión, stock, turnos, reservas o lo que tu negocio necesite, hechos a tu medida y no al revés. Rápidos, fáciles de usar y pensados para durar.",
+                tags: ["Stock", "Turnos", "Reservas", "Facturación"],
             },
             architecture: {
                 title: "Integración de Sistemas",
                 description: "Conectamos tus herramientas (facturación, web, WhatsApp, planillas o sistemas viejos) para que los datos pasen solos de un lado a otro y nada se cargue dos veces.",
+                tags: ["Web", "WhatsApp", "ARCA", "Planillas"],
             },
             ai: {
                 title: "IA Aplicada al Negocio",
                 description: "Asistentes que responden consultas por WhatsApp o en tu web, lectura automática de facturas y documentos, y reportes que se arman solos. IA que resuelve problemas concretos.",
+                tags: ["Asistentes de WhatsApp", "Lectura de facturas", "Reportes automáticos"],
             },
         },
     },

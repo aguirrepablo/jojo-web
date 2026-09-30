@@ -18,7 +18,6 @@ export const en: Dictionary = {
         close: "Close",
     },
     hero: {
-        badge: "Software development · Córdoba, Argentina",
         scroll: "Scroll to explore",
         title_top: "Custom software",
         title_bottom: "with AI.",
@@ -38,14 +37,17 @@ export const en: Dictionary = {
             customDevelopment: {
                 title: "Custom Development",
                 description: "Management, inventory, booking or whatever system your business needs, built around how you work, not the other way around. Fast, easy to use and built to last.",
+                tags: ["Inventory", "Bookings", "Scheduling", "Invoicing"],
             },
             architecture: {
                 title: "Systems Integration",
                 description: "We connect your tools (invoicing, website, WhatsApp, spreadsheets or legacy systems) so data flows on its own and nothing gets entered twice.",
+                tags: ["Website", "WhatsApp", "Invoicing", "Spreadsheets"],
             },
             ai: {
                 title: "AI Applied to Business",
                 description: "Assistants that answer questions on WhatsApp or your website, automatic reading of invoices and documents, and reports that build themselves. AI that solves concrete problems.",
+                tags: ["WhatsApp assistants", "Invoice reading", "Automated reports"],
             },
         },
     },

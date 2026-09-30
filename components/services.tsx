@@ -4,21 +4,19 @@ import { useRef } from "react";
 import { gsap } from "gsap";
 import { useGSAP } from "@gsap/react";
 import { Dictionary } from "@/dictionaries/es";
-import { revealUp, parallax, energyFloat, spin, pulse, blink } from "@/lib/animations";
-import { DevelopmentIcon, ArchitectureIcon, AiIcon } from "./service-icons";
+import { revealUp } from "@/lib/animations";
 
 interface ServicesProps {
   dict: Dictionary;
-  onOpenContact: () => void;
 }
 
-export function Services({ dict, onOpenContact }: ServicesProps) {
+export function Services({ dict }: ServicesProps) {
   const scope = useRef<HTMLElement>(null);
 
   const items = [
-    { Icon: DevelopmentIcon, ...dict.services.items.customDevelopment },
-    { Icon: ArchitectureIcon, ...dict.services.items.architecture },
-    { Icon: AiIcon, ...dict.services.items.ai },
+    dict.services.items.customDevelopment,
+    dict.services.items.architecture,
+    dict.services.items.ai,
   ];
 
   useGSAP(
@@ -27,23 +25,7 @@ export function Services({ dict, onOpenContact }: ServicesProps) {
       revealUp(q("[data-head]"), { trigger: scope.current });
       q("[data-block]").forEach((block) => {
         revealUp(block.querySelectorAll("[data-rise]"), { trigger: block });
-        const blob = block.querySelector(".blob");
-        if (blob) parallax(blob, { amount: 20, trigger: block });
       });
-      energyFloat(q(".service-icon"));
-
-      // Animacion por parte (SVG en capas).
-      q(".ai-orbit").forEach((el, i) =>
-        spin(el, {
-          duration: 15 + i * 5,
-          direction: i % 2 ? -1 : 1,
-          svgOrigin: "300 240",
-        }),
-      );
-      pulse(q(".ai-core"), { svgOrigin: "300 240", scale: 1.05, duration: 3 });
-      pulse(q(".arch-hub"), { svgOrigin: "300 240", scale: 1.05, duration: 3.2 });
-      pulse(q(".arch-node"), { scale: 1.12, duration: 2.6, stagger: 0.4 });
-      blink(q(".dev-caret"), { min: 0.5, duration: 1.1 });
     },
     { scope },
   );
@@ -67,46 +49,34 @@ export function Services({ dict, onOpenContact }: ServicesProps) {
           </p>
         </div>
 
-        <div className="mt-20 flex flex-col">
+        <div className="hairline-b mt-20 flex flex-col">
           {items.map((it, i) => (
             <div
               key={i}
               data-block
-              className={`grid items-center gap-10 py-14 lg:grid-cols-2 lg:gap-16 ${
-                i > 0 ? "hairline-t" : ""
-              }`}
+              className="hairline-t grid gap-6 py-12 lg:grid-cols-12 lg:gap-10 lg:py-16"
             >
-              <div
+              <span
                 data-rise
-                className="relative order-1 aspect-[4/3] lg:order-none"
+                className="display text-[clamp(2.5rem,5vw,4rem)] leading-none text-surface-50 lg:col-span-2"
               >
-                <span
-                  aria-hidden
-                  className="blob left-1/2 top-1/2 h-[75%] w-[75%] -translate-x-1/2 -translate-y-1/2"
-                />
-                <it.Icon className="service-icon relative h-full w-full overflow-visible" />
-              </div>
+                {String(i + 1).padStart(2, "0")}
+              </span>
 
-              <div className="order-2 lg:order-none">
-                <span data-rise className="eyebrow">
-                  {String(i + 1).padStart(2, "0")}
-                </span>
-                <h3
-                  data-rise
-                  className="display mt-6 text-[clamp(1.75rem,3.5vw,2.75rem)] leading-[1.1]"
-                >
-                  {it.title}
-                </h3>
-                <p data-rise className="mt-4 max-w-md text-body text-surface-50">
+              <h3
+                data-rise
+                className="display text-[clamp(1.75rem,3.5vw,2.75rem)] leading-[1.1] lg:col-span-4"
+              >
+                {it.title}
+              </h3>
+
+              <div className="lg:col-span-6">
+                <p data-rise className="max-w-xl text-body text-surface-50">
                   {it.description}
                 </p>
-                <button
-                  data-rise
-                  onClick={onOpenContact}
-                  className="pill pill-sm mt-8"
-                >
-                  {dict.common.explore}
-                </button>
+                <p data-rise className="mt-5 text-body-sm text-surface-cream/80">
+                  {it.tags.join(" · ")}
+                </p>
               </div>
             </div>
           ))}

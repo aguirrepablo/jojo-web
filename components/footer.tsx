@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import { Instagram, Linkedin } from "lucide-react";
 import { Dictionary } from "@/dictionaries/es";
 
 interface FooterProps {
@@ -20,6 +21,11 @@ export function Footer({ dict }: FooterProps) {
     { label: dict.header.services, id: "servicios" },
     { label: dict.header.focus, id: "enfoque" },
     { label: dict.header.faq, id: "faq" },
+  ];
+
+  const social = [
+    { label: "LinkedIn", href: "https://www.linkedin.com/in/paguirre90/", Icon: Linkedin },
+    { label: "Instagram @jojo.agencia", href: "https://www.instagram.com/jojo.agencia/", Icon: Instagram },
   ];
 
   return (
@@ -46,15 +52,22 @@ export function Footer({ dict }: FooterProps) {
                   {n.label}
                 </a>
               ))}
-              <a
-                href="https://www.linkedin.com/in/paguirre90/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-body-sm text-surface-cream/70 transition-colors hover:text-surface-cream"
-              >
-                LinkedIn
-              </a>
             </nav>
+            <div className="flex items-center gap-3">
+              {social.map((s) => (
+                <a
+                  key={s.label}
+                  href={s.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={s.label}
+                  title={s.label}
+                  className="grid h-10 w-10 place-items-center rounded-full border border-surface-25 text-surface-cream/70 transition-colors hover:border-surface-cream hover:text-surface-cream"
+                >
+                  <s.Icon size={18} />
+                </a>
+              ))}
+            </div>
           </div>
         </div>
 
