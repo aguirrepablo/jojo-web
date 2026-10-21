@@ -15,10 +15,9 @@ import { Dictionary } from "@/dictionaries/es";
 
 interface HomePageProps {
   dict: Dictionary;
-  lang: string;
 }
 
-export function HomePage({ dict, lang }: HomePageProps) {
+export function HomePage({ dict }: HomePageProps) {
   const [isChatOpen, setIsChatOpen] = useState(false);
   const [isContactOpen, setIsContactOpen] = useState(false);
   const showChat = process.env.NEXT_PUBLIC_CHAT_FEATURE_FLAG === "true";
@@ -27,7 +26,7 @@ export function HomePage({ dict, lang }: HomePageProps) {
 
   return (
     <div className="min-h-screen">
-      <Header dict={dict} lang={lang} />
+      <Header dict={dict} />
       <ScrollProvider>
         <main>
           <Hero
@@ -46,12 +45,11 @@ export function HomePage({ dict, lang }: HomePageProps) {
             isOpen={isContactOpen}
             onClose={() => setIsContactOpen(false)}
             dict={dict}
-            lang={lang}
           />
           <About dict={dict} />
           <Services dict={dict} />
           <Approach dict={dict} onOpenContact={openContact} />
-          <Faq dict={dict} />
+          <Faq faq={dict.faq} />
         </main>
       </ScrollProvider>
       <Footer dict={dict} />

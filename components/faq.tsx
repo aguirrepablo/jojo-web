@@ -8,10 +8,10 @@ import { Dictionary } from "@/dictionaries/es";
 import { revealUp } from "@/lib/animations";
 
 interface FaqProps {
-  dict: Dictionary;
+  faq: Dictionary["faq"];
 }
 
-export function Faq({ dict }: FaqProps) {
+export function Faq({ faq }: FaqProps) {
   const scope = useRef<HTMLElement>(null);
   // primer item abierto por defecto: da contexto y evita un bloque vacio.
   const [open, setOpen] = useState<number | null>(0);
@@ -31,17 +31,17 @@ export function Faq({ dict }: FaqProps) {
     <section ref={scope} id="faq" className="section-y scroll-mt-24">
       <div className="mx-auto max-w-content px-4 sm:px-8">
         <span data-rise className="eyebrow">
-          {dict.faq.eyebrow}
+          {faq.eyebrow}
         </span>
         <h2 data-rise className="display mt-6 text-[clamp(2.25rem,6vw,4.75rem)]">
-          {dict.faq.title}
+          {faq.title}
         </h2>
         <p data-rise className="mt-5 text-body-lg text-surface-50">
-          {dict.faq.subtitle}
+          {faq.subtitle}
         </p>
 
         <ul className="mt-16">
-          {dict.faq.items.map((item, i) => {
+          {faq.items.map((item, i) => {
             const isOpen = open === i;
             return (
               <li

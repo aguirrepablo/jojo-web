@@ -5,18 +5,15 @@ import Image from "next/image";
 import { Menu, X } from "lucide-react";
 import { useEffect, useState } from "react";
 import { Dictionary } from "@/dictionaries/es";
-import { usePathname } from "next/navigation";
 
 interface HeaderProps {
   dict: Dictionary;
-  lang: string;
 }
 
-export function Header({ dict, lang }: HeaderProps) {
+export function Header({ dict }: HeaderProps) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [hidden, setHidden] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const pathname = usePathname();
 
   useEffect(() => {
     let last = window.scrollY;
@@ -31,16 +28,16 @@ export function Header({ dict, lang }: HeaderProps) {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  // Si la sección no está en esta página (ej. una página de servicio),
+  // deja que el link navegue a la home con el ancla.
   const scrollTo = (e: React.MouseEvent, id: string) => {
-    e.preventDefault();
     const el = document.getElementById(id);
-    if (el) window.scrollTo({ top: el.offsetTop - 96, behavior: "smooth" });
+    if (el) {
+      e.preventDefault();
+      window.scrollTo({ top: el.offsetTop - 96, behavior: "smooth" });
+    }
     setIsMenuOpen(false);
   };
-
-  const nextLang = lang === "es" ? "en" : "es";
-  // <a> real (no <button>) para que los crawlers descubran la otra versión
-  const langHref = pathname.replace(`/${lang}`, `/${nextLang}`);
 
   const links = [
     { label: dict.header.services, id: "servicios" },
@@ -60,7 +57,7 @@ export function Header({ dict, lang }: HeaderProps) {
     >
       <div className="mx-auto flex h-16 max-w-wide items-center justify-between gap-4 px-4 sm:px-8">
         <Link
-          href={`/${lang}#home`}
+          href="/#home"
           onClick={(e) => scrollTo(e, "home")}
           aria-label="JOJO"
           className="shrink-0"
@@ -79,7 +76,7 @@ export function Header({ dict, lang }: HeaderProps) {
           {links.map((l) => (
             <a
               key={l.id}
-              href={`#${l.id}`}
+              href={`/#${l.id}`}
               onClick={(e) => scrollTo(e, l.id)}
               className="text-body-sm text-surface-cream/70 transition-colors hover:text-surface-cream"
             >
@@ -89,16 +86,6 @@ export function Header({ dict, lang }: HeaderProps) {
         </nav>
 
         <div className="flex items-center gap-3">
-          <Link
-            href={langHref}
-            hrefLang={nextLang}
-            onClick={() => setIsMenuOpen(false)}
-            aria-label="Language"
-            className="text-body-sm text-surface-cream/60 transition-colors hover:text-surface-cream"
-          >
-            {nextLang.toUpperCase()}
-          </Link>
-
           <button
             onClick={() => setIsMenuOpen((v) => !v)}
             className="grid h-8 w-8 place-items-center text-surface-cream md:hidden"
@@ -115,7 +102,7 @@ export function Header({ dict, lang }: HeaderProps) {
             {links.map((l) => (
               <a
                 key={l.id}
-                href={`#${l.id}`}
+                href={`/#${l.id}`}
                 onClick={(e) => scrollTo(e, l.id)}
                 className="py-2 text-body text-surface-cream/80 transition-colors hover:text-surface-cream"
               >

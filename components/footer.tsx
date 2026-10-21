@@ -9,10 +9,13 @@ interface FooterProps {
 }
 
 export function Footer({ dict }: FooterProps) {
+  // Igual que en el header: fuera de la home el link navega a `/#id`.
   const scrollTo = (e: React.MouseEvent, id: string) => {
-    e.preventDefault();
     const el = document.getElementById(id);
-    if (el) window.scrollTo({ top: el.offsetTop - 96, behavior: "smooth" });
+    if (el) {
+      e.preventDefault();
+      window.scrollTo({ top: el.offsetTop - 96, behavior: "smooth" });
+    }
   };
 
   const nav = [
@@ -45,7 +48,7 @@ export function Footer({ dict }: FooterProps) {
               {nav.map((n) => (
                 <a
                   key={n.id}
-                  href={`#${n.id}`}
+                  href={`/#${n.id}`}
                   onClick={(e) => scrollTo(e, n.id)}
                   className="text-body-sm text-surface-cream/70 transition-colors hover:text-surface-cream"
                 >

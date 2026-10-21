@@ -1,8 +1,8 @@
 import { Providers } from "@/components/providers";
 import type { Metadata } from "next";
 import { DM_Sans } from "next/font/google";
-import "../globals.css";
-import { getDictionary } from "../get-dictionary";
+import "./globals.css";
+import { getDictionary } from "./get-dictionary";
 import { SITE_URL } from "@/lib/site";
 
 // Familia unica del sistema — sustituto libre de Mori (ver docs/desing_new/DESIGN.md)
@@ -14,9 +14,8 @@ const dmSans = DM_Sans({
 
 const OG_IMAGE = `${SITE_URL}/og.png`;
 
-export async function generateMetadata({ params }: { params: Promise<{ lang: string }> }): Promise<Metadata> {
-  const { lang } = await params;
-  const dict = await getDictionary(lang);
+export async function generateMetadata(): Promise<Metadata> {
+  const dict = await getDictionary();
 
   return {
     metadataBase: new URL(SITE_URL),
@@ -25,18 +24,10 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
       template: `%s | ${dict.metadata.title}`,
     },
     description: dict.metadata.description,
-    alternates: {
-      canonical: `${SITE_URL}/${lang}`,
-      languages: {
-        'es-AR': `${SITE_URL}/es`,
-        'en-US': `${SITE_URL}/en`,
-        'x-default': `${SITE_URL}/es`,
-      },
-    },
     openGraph: {
       type: "website",
-      locale: lang === 'es' ? 'es_AR' : 'en_US',
-      url: `${SITE_URL}/${lang}`,
+      locale: 'es_AR',
+      url: SITE_URL,
       siteName: "JOJO",
       title: dict.metadata.title,
       description: dict.metadata.description,
@@ -69,23 +60,16 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
   };
 }
 
-export async function generateStaticParams() {
-  return [{ lang: 'es' }, { lang: 'en' }];
-}
-
 export default async function RootLayout({
   children,
-  params,
 }: Readonly<{
   children: React.ReactNode;
-  params: Promise<{ lang: string }>;
 }>) {
-  const { lang } = await params;
   const gaMeasurementId = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID;
-  const dict = await getDictionary(lang);
+  const dict = await getDictionary();
 
   return (
-    <html lang={lang}>
+    <html lang="es">
       <body className={`${dmSans.variable} antialiased`}>
         <Providers>
           {gaMeasurementId && (
@@ -143,11 +127,12 @@ export default async function RootLayout({
               ],
               "hasOfferCatalog": {
                 "@type": "OfferCatalog",
-                "name": lang === "es" ? "Servicios de JOJO" : "JOJO Services",
+                "name": "Servicios de JOJO",
                 "itemListElement": [
                   dict.services.items.customDevelopment.title,
                   dict.services.items.architecture.title,
-                  dict.services.items.ai.title
+                  dict.services.items.ai.title,
+                  dict.services.items.web.title
                 ].map((name) => ({
                   "@type": "Offer",
                   "itemOffered": { "@type": "Service", "name": name }
@@ -157,18 +142,6 @@ export default async function RootLayout({
                 "https://www.linkedin.com/in/paguirre90/"
               ],
               "priceRange": "$$"
-            }) }}
-          />
-          <script
-            type="application/ld+json"
-            dangerouslySetInnerHTML={{ __html: JSON.stringify({
-              "@context": "https://schema.org",
-              "@type": "FAQPage",
-              "mainEntity": dict.faq.items.map((item) => ({
-                "@type": "Question",
-                "name": item.q,
-                "acceptedAnswer": { "@type": "Answer", "text": item.a }
-              }))
             }) }}
           />
           {children}

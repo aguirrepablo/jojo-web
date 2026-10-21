@@ -30,7 +30,7 @@ export const es = {
     },
     services: {
         title: "Nuestros Servicios",
-        subtitle: "Tres formas de ayudarte: hacer el sistema que necesitás, conectarlo con lo que ya usás y sumarle inteligencia artificial donde de verdad sirve.",
+        subtitle: "Cuatro formas de ayudarte: hacer el sistema que necesitás, conectarlo con lo que ya usás, sumarle inteligencia artificial donde de verdad sirve y armar la web de tu negocio.",
         items: {
             customDevelopment: {
                 title: "Desarrollo a Medida",
@@ -46,6 +46,12 @@ export const es = {
                 title: "IA Aplicada al Negocio",
                 description: "Asistentes que responden consultas por WhatsApp o en tu web, lectura automática de facturas y documentos, y reportes que se arman solos. IA que resuelve problemas concretos.",
                 tags: ["Asistentes de WhatsApp", "Lectura de facturas", "Reportes automáticos"],
+            },
+            web: {
+                title: "Páginas Web",
+                description: "La web de tu negocio por un abono mensual, con el hosting incluido. Rápida, pensada para celular, con botón de WhatsApp y lista para que te encuentren en Google.",
+                tags: ["Abono mensual", "Hosting incluido", "WhatsApp", "Google"],
+                link: "Más sobre páginas web",
             },
         },
     },
@@ -85,6 +91,10 @@ export const es = {
             {
                 q: "¿Qué tipo de sistemas desarrollan?",
                 a: "Sistemas a medida para negocios y empresas: gestión de stock, turnos y reservas, facturación y administración, páginas web y aplicaciones, y portales para tus clientes. También modernizamos sistemas viejos que ya no dan más.",
+            },
+            {
+                q: "¿Hacen páginas web? ¿Cómo funciona el abono?",
+                a: "Sí. Armamos la web de tu negocio por un abono mensual con el hosting incluido. El dominio (tu .com o .com.ar) se paga aparte, una vez al año. El plan básico tiene una permanencia mínima de 6 meses; si necesitás algo más que el básico se suma un pago único, y los proyectos muy personalizados los cotizamos a medida.",
             },
             {
                 q: "¿Cómo puede ayudar la inteligencia artificial a mi negocio?",

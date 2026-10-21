@@ -9,10 +9,9 @@ interface ContactModalProps {
   isOpen: boolean;
   onClose: () => void;
   dict: Dictionary;
-  lang: string;
 }
 
-export function ContactModal({ isOpen, onClose, dict, lang }: ContactModalProps) {
+export function ContactModal({ isOpen, onClose, dict }: ContactModalProps) {
   const { executeRecaptcha } = useGoogleReCaptcha();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
@@ -56,7 +55,7 @@ export function ContactModal({ isOpen, onClose, dict, lang }: ContactModalProps)
         ? await executeRecaptcha("contact_form")
         : undefined;
 
-      const response = await fetch(`/${lang}/api/contact`, {
+      const response = await fetch("/api/contact", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -229,51 +228,25 @@ export function ContactModal({ isOpen, onClose, dict, lang }: ContactModalProps)
 
                 {/* Atribucion reCAPTCHA — requerida por Google al ocultar el badge */}
                 <p className="text-center text-[11px] leading-relaxed text-surface-50">
-                  {lang === "es" ? (
-                    <>
-                      Protegido por reCAPTCHA; aplican la{" "}
-                      <a
-                        href="https://policies.google.com/privacy"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="underline underline-offset-2 hover:text-coral-bright"
-                      >
-                        Política de Privacidad
-                      </a>{" "}
-                      y los{" "}
-                      <a
-                        href="https://policies.google.com/terms"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="underline underline-offset-2 hover:text-coral-bright"
-                      >
-                        Términos de Servicio
-                      </a>{" "}
-                      de Google.
-                    </>
-                  ) : (
-                    <>
-                      This site is protected by reCAPTCHA and the Google{" "}
-                      <a
-                        href="https://policies.google.com/privacy"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="underline underline-offset-2 hover:text-coral-bright"
-                      >
-                        Privacy Policy
-                      </a>{" "}
-                      and{" "}
-                      <a
-                        href="https://policies.google.com/terms"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="underline underline-offset-2 hover:text-coral-bright"
-                      >
-                        Terms of Service
-                      </a>{" "}
-                      apply.
-                    </>
-                  )}
+                  Protegido por reCAPTCHA; aplican la{" "}
+                  <a
+                    href="https://policies.google.com/privacy"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="underline underline-offset-2 hover:text-coral-bright"
+                  >
+                    Política de Privacidad
+                  </a>{" "}
+                  y los{" "}
+                  <a
+                    href="https://policies.google.com/terms"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="underline underline-offset-2 hover:text-coral-bright"
+                  >
+                    Términos de Servicio
+                  </a>{" "}
+                  de Google.
                 </p>
               </form>
             </div>

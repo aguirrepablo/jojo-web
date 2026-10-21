@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef } from "react";
+import Link from "next/link";
 import { gsap } from "gsap";
 import { useGSAP } from "@gsap/react";
 import { Dictionary } from "@/dictionaries/es";
@@ -13,10 +14,11 @@ interface ServicesProps {
 export function Services({ dict }: ServicesProps) {
   const scope = useRef<HTMLElement>(null);
 
-  const items = [
+  const items: { title: string; description: string; tags: string[]; link?: string; href?: string }[] = [
     dict.services.items.customDevelopment,
     dict.services.items.architecture,
     dict.services.items.ai,
+    { ...dict.services.items.web, href: "/paginas-web" },
   ];
 
   useGSAP(
@@ -77,6 +79,11 @@ export function Services({ dict }: ServicesProps) {
                 <p data-rise className="mt-5 text-body-sm text-surface-cream/80">
                   {it.tags.join(" · ")}
                 </p>
+                {it.href && it.link && (
+                  <Link data-rise href={it.href} className="pill mt-8 inline-flex">
+                    {it.link} →
+                  </Link>
+                )}
               </div>
             </div>
           ))}
