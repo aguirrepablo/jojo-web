@@ -15,9 +15,9 @@ export function Services({ dict }: ServicesProps) {
   const scope = useRef<HTMLElement>(null);
 
   const items: { title: string; description: string; tags: string[]; link?: string; href?: string }[] = [
-    dict.services.items.customDevelopment,
-    dict.services.items.architecture,
-    dict.services.items.ai,
+    { ...dict.services.items.customDevelopment, href: "/software-a-medida" },
+    { ...dict.services.items.architecture, href: "/automatizacion" },
+    { ...dict.services.items.ai, href: "/asistente-whatsapp-ia" },
     { ...dict.services.items.web, href: "/paginas-web" },
   ];
 

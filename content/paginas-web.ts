@@ -8,6 +8,7 @@ export const paginasWeb: ServicePageContent = {
     metaTitle: "Páginas web en Villa Carlos Paz con abono mensual | JOJO",
     metaDescription: "Páginas web para negocios de Villa Carlos Paz y el Valle de Punilla por un abono mensual con hosting incluido. Rápidas, pensadas para celular, con WhatsApp y listas para Google.",
     serviceName: "Páginas web con abono mensual",
+    serviceType: "Diseño y desarrollo de páginas web",
     eyebrow: "Páginas web · Villa Carlos Paz y Punilla",
     title: "Páginas web con abono mensual en Villa Carlos Paz",
     intro: "Tener la web de tu negocio no tiene que significar un pago grande de entrada. Con el abono mensual te armamos la página, la publicamos y la mantenemos online con el hosting incluido. Vos te ocupás de tu negocio; nosotros, de que la web funcione.",

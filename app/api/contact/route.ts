@@ -27,16 +27,53 @@ async function verifyRecaptcha(token: unknown): Promise<boolean> {
   }
 }
 
+// Los campos del formulario van al HTML del mail: sin escapar, cualquiera podría
+// inyectar links o contenido que parece salir de nuestro propio formulario.
+function escapeHtml(value: string): string {
+  return value
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#39;");
+}
+
+/** Devuelve el texto recortado, "" si no vino, o null si no es texto o es muy largo. */
+function readField(value: unknown, maxLength: number): string | null {
+  if (value === undefined || value === null) return "";
+  if (typeof value !== "string") return null;
+  const trimmed = value.trim();
+  return trimmed.length > maxLength ? null : trimmed;
+}
+
+const EMAIL_PATTERN = /^[^\s@<>,;]+@[^\s@<>,;]+\.[^\s@<>,;]+$/;
+
 export async function POST(req: Request) {
   try {
-    const { name, email, phone, company, description, recaptchaToken } =
-      await req.json();
+    const body = await req.json();
+    const name = readField(body?.name, 100);
+    const email = readField(body?.email, 254);
+    const phone = readField(body?.phone, 50);
+    const company = readField(body?.company, 150);
+    const description = readField(body?.description, 5000);
+    const recaptchaToken = body?.recaptchaToken;
+
+    if (
+      name === null || email === null || phone === null ||
+      company === null || description === null
+    ) {
+      return NextResponse.json({ error: "Invalid fields" }, { status: 400 });
+    }
 
     if (!name || !email || !description) {
       return NextResponse.json(
         { error: "Missing required fields" },
         { status: 400 }
       );
+    }
+
+    if (!EMAIL_PATTERN.test(email)) {
+      return NextResponse.json({ error: "Invalid email" }, { status: 400 });
     }
 
     if (!(await verifyRecaptcha(recaptchaToken))) {
@@ -60,7 +97,7 @@ export async function POST(req: Request) {
       from: process.env.SMTP_FROM || process.env.SMTP_USER,
       to: process.env.CONTACT_EMAIL,
       replyTo: email,
-      subject: `Nuevo mensaje de contacto de ${name}`,
+      subject: `Nuevo mensaje de contacto de ${name.replace(/\s+/g, " ")}`,
       text: `
         Nombre: ${name}
         Email: ${email}
@@ -71,12 +108,12 @@ export async function POST(req: Request) {
       `,
       html: `
         <h3>Nuevo mensaje de contacto</h3>
-        <p><strong>Nombre:</strong> ${name}</p>
-        <p><strong>Email:</strong> ${email}</p>
-        <p><strong>Teléfono:</strong> ${phone || "No proporcionado"}</p>
-        <p><strong>Empresa:</strong> ${company || "No proporcionada"}</p>
+        <p><strong>Nombre:</strong> ${escapeHtml(name)}</p>
+        <p><strong>Email:</strong> ${escapeHtml(email)}</p>
+        <p><strong>Teléfono:</strong> ${phone ? escapeHtml(phone) : "No proporcionado"}</p>
+        <p><strong>Empresa:</strong> ${company ? escapeHtml(company) : "No proporcionada"}</p>
         <p><strong>Mensaje:</strong></p>
-        <p>${description.replace(/\n/g, "<br>")}</p>
+        <p>${escapeHtml(description).replace(/\n/g, "<br>")}</p>
       `,
     };
 

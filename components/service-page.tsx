@@ -14,6 +14,7 @@ export interface ServicePageContent {
   metaTitle: string;
   metaDescription: string;
   serviceName: string;
+  serviceType: string;
   eyebrow: string;
   title: string;
   intro: string;
