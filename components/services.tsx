@@ -80,9 +80,13 @@ export function Services({ dict }: ServicesProps) {
                   {it.tags.join(" · ")}
                 </p>
                 {it.href && it.link && (
-                  <Link data-rise href={it.href} className="pill mt-8 inline-flex">
-                    {it.link} →
-                  </Link>
+                  // El reveal va en el wrapper: la transición de opacity de .pill
+                  // pisa la animación de GSAP y el link quedaba invisible.
+                  <div data-rise className="mt-8">
+                    <Link href={it.href} className="pill inline-flex">
+                      {it.link} →
+                    </Link>
+                  </div>
                 )}
               </div>
             </div>
