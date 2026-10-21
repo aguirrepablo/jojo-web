@@ -69,7 +69,7 @@ export default async function RootLayout({
   const dict = await getDictionary();
 
   return (
-    <html lang="es">
+    <html lang="es" data-scroll-behavior="smooth">
       <body className={`${dmSans.variable} antialiased`}>
         <Providers>
           {gaMeasurementId && (
